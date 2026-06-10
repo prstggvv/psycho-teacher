@@ -1,0 +1,26 @@
+@font-face {
+  src: url('../../shared/assets/fonts/gteestiprodisplay_light.woff') format('woff'),
+    url('../../shared/assets/fonts/gteestiprodisplay_light.woff2') format('woff2');
+  font-family: 'GT Eesti Pro Display-light';
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url('../../shared/assets/fonts/gteestiprodisplay_regular.woff') format('woff'),
+    url('../../shared/assets/fonts/gteestiprodisplay_regular.woff2') format('woff2');
+  font-family: 'GT Eesti Pro Display-regular';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  src: url('../../shared/assets/fonts/gteestiprodisplay_bold.woff') format('woff'),
+    url('../../shared/assets/fonts/gteestiprodisplay_bold.woff2') format('woff2');
+  font-family: 'GT Eesti Pro Display-bold';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

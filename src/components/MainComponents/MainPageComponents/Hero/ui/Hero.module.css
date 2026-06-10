@@ -1,0 +1,202 @@
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #07090f;
+  overflow: hidden;
+}
+
+/* ── Left text panel ── */
+.textContent {
+  flex: 0 0 42%;
+  position: relative;
+  z-index: 2;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 120px 0 80px 7vw;
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.28);
+  font-family: var(--font-gt-pro-bold);
+}
+
+.rule {
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.title {
+  margin: 0;
+  color: rgba(228, 232, 248, 0.88);
+  font-family: var(--font-gt-pro-light);
+  font-size: clamp(28px, 3.2vw, 52px);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.titleAccent {
+  color: #ff2d2d;
+  display: block;
+}
+
+.subtitle {
+  margin: 0;
+  max-width: 320px;
+  color: rgba(165, 175, 210, 0.55);
+  font-family: var(--font-gt-pro-regular);
+  font-size: clamp(11px, 1vw, 13px);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  margin: 4px 0 0;
+}
+
+.btnPrimary {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 32px;
+  border: 0;
+  text-decoration: none;
+  background-color: #ff2d2d;
+  color: #ffffff;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity .2s ease;
+}
+
+.btnPrimary:hover {
+  transform: translateY(-2px);
+  opacity: .8;
+}
+
+.btnPrimary:focus-visible {
+  outline: 2px solid rgba(255, 45, 45, 0.55);
+  outline-offset: 4px;
+}
+
+.btnPrimaryIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  display: block;
+  transition: transform 0.25s ease;
+}
+
+.btnPrimary:hover .btnPrimaryIcon {
+  transform: translateX(3px);
+}
+
+.canvasWrapper {
+  flex: 1;
+  height: 100vh;
+  position: relative;
+  margin-top: 50px;
+  min-width: 0;
+}
+
+.canvasWrapper::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  background: linear-gradient(to right, #07090f, transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  .textContent {
+    flex: 0 0 46%;
+  }
+}
+
+@media (max-width: 860px) {
+  .textContent {
+    flex: 0 0 52%;
+  }
+
+  .left {
+    gap: 18px;
+    padding: 100px 0 60px 5vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 2.8rem;
+  }
+
+  .textContent {
+    flex: none;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .left {
+    padding: 0 1.8rem;
+    gap: 14px;
+  }
+
+  .canvasWrapper {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    opacity: 0.32;
+    flex: none;
+  }
+
+  .canvasWrapper::before {
+    display: none;
+  }
+
+  .subtitle {
+    max-width: 280px;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btnPrimary {
+    justify-content: center;
+  }
+}

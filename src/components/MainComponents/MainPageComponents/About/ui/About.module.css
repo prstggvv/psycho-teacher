@@ -1,0 +1,556 @@
+.section {
+  padding: 80px 0;
+  background-color: rgb(249, 250, 251);
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--product-page-padding-x);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.head {
+  width: 100%;
+}
+
+.introLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 48px;
+  align-items: start;
+}
+
+.copyColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.copyStack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.primaryLead {
+  margin: 0;
+  color: #1a1a1a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.secondaryLead {
+  margin: 0;
+  max-width: 560px;
+  color: #7a7a7a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.visualPanel {
+  position: relative;
+  min-height: 500px;
+  overflow: hidden;
+  background-color: #ece9e2;
+  box-sizing: border-box;
+  padding-right: var(--product-page-padding-x);
+}
+
+.visualImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visualBadge {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 20px;
+  background-color: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-left: 2px solid #ff2d2d;
+}
+
+.visualBadgeYear {
+  color: #ffffff;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.visualBadgeLabel {
+  color: rgba(255, 255, 255, 0.62);
+  font-family: var(--font-gt-pro-regular);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Marquee ─────────────────────────────────────── */
+
+.marqueeWrap {
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 13px 0;
+  margin: 0 calc(-1 * var(--product-page-padding-x));
+}
+
+.marqueeTrack {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.marqueeItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding-right: 18px;
+  color: #7a7a7a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.marqueeDot {
+  color: #ff2d2d;
+  font-size: 7px;
+  line-height: 1;
+}
+
+@keyframes marqueeScroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.featuresSection {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.featuresHeading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.featuresIndex {
+  margin: 0;
+  color: #ff2d2d;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.featuresHeadingTitle {
+  margin: 0;
+  color: #7a7a7a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.featuresGrid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 48px 32px;
+}
+
+.featureCard {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  padding: 18px 18px 14px 14px;
+  background-color: transparent;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.featureCardAccent {
+  background-color: #ff2d2d;
+}
+
+.featureCardAccent::before,
+.featureCardAccent::after {
+  content: '';
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.52);
+  transition: background-color 0.25s ease, width 0.25s ease, height 0.25s ease;
+}
+
+.featureCardAccent::before {
+  top: 0;
+  left: 0;
+  width: 26px;
+  height: 1px;
+}
+
+.featureCardAccent::after {
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 26px;
+}
+
+.featureCard:hover {
+  background-color: rgba(255, 45, 45, 0.05);
+}
+
+.featureCardAccent:hover {
+  background-color: #e32727;
+}
+
+.featureCardAccent:hover::before,
+.featureCardAccent:hover::after {
+  background-color: rgba(255, 255, 255, 0.88);
+}
+
+.featureHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.featureTitle {
+  margin: 0;
+  color: #1a1a1a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.25;
+  transition: color 0.3s ease;
+}
+
+.featureCard:hover .featureTitle {
+  color: #ff2d2d;
+}
+
+.featureCardAccent .featureTitle,
+.featureCardAccent:hover .featureTitle {
+  color: #ffffff;
+}
+
+.featureNumber {
+  flex-shrink: 0;
+  color: #ff2d2d;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+}
+
+.featureNumber.linkNumber {
+  color: #ffffff;
+}
+
+.featureCardAccent .featureNumber {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.featureText {
+  max-width: 280px;
+  margin: 0;
+  color: #7a7a7a;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.featureCardAccent .featureText {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.featureLine {
+  width: 48px;
+  height: 1px;
+  background-color: rgba(255, 45, 45, 0.2);
+  transition: width 0.5s ease, background-color 0.3s ease;
+}
+
+.featureCardAccent .featureLine {
+  background-color: rgba(255, 255, 255, 0.38);
+}
+
+.featureCard:hover .featureLine {
+  width: 100%;
+  background-color: rgba(255, 45, 45, 0.45);
+}
+
+.featureCardAccent:hover .featureLine {
+  background-color: rgba(255, 255, 255, 0.86);
+}
+
+.featureCardCta {
+  padding: 0;
+  background-color: #ff2d2d;
+  overflow: hidden;
+  transform-origin: center;
+  transition: background-color 0.22s ease;
+}
+
+.featureCardCta:last-of-type {
+  background-color: #111111;
+}
+
+.featureCardCtaLink {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  gap: 16px;
+  background-color: #111111;
+  position: relative;
+  padding: 18px 18px 14px 14px;
+  transition: transform 0.25s ease;
+}
+
+.featureCardCtaLink:hover {
+  background-color: #111111;
+}
+
+.featureCtaContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.featureCtaEyebrow {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font-gt-pro-regular);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.featureCtaTitle {
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.featureCtaText {
+  max-width: 280px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-family: var(--font-gt-pro-regular);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.ctaIconNumber {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.featureCtaArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.08);
+  transition: border-color 0.22s ease, background-color 0.22s ease;
+}
+
+
+.featureCardCta:hover .featureCtaArrow {
+  border-color: rgba(255, 255, 255, 0.92);
+  background-color: rgba(0, 0, 0, 0.18);
+}
+
+.featureCardCta:hover .ctaIcon {
+  transform: translateX(4px);
+}
+
+.featureCardCtaLink:hover .ctaIconNumber {
+  transform: translateX(4px);
+}
+
+.ctaButton {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 32px;
+  border: 0;
+  text-decoration: none;
+  background-color: #ff2d2d;
+  color: #ffffff;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.ctaButton:hover .ctaIcon {
+  transform: translateX(4px);
+}
+
+.ctaIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.externalLinkButton {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 56px;
+  padding: 0 32px;
+  text-decoration: none;
+  background-color: #ff2d2d;
+  color: #ffffff;
+  font-family: var(--font-gt-pro-regular);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.externalLinkButton:hover {
+  transform: translateY(-2px);
+  background-color: #111111;
+  color: #ffffff;
+}
+
+.externalLinkButton:hover .ctaIcon {
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .introLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .visualPanel {
+    min-height: 420px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .section {
+    padding: 52px 0;
+  }
+
+  .container {
+    gap: 24px;
+  }
+
+  .primaryLead {
+    font-size: 22px;
+  }
+
+  .secondaryLead {
+    font-size: 16px;
+  }
+
+  .visualPanel {
+    min-height: 300px;
+  }
+
+  .featuresHeading {
+    gap: 12px;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .featureCard {
+    padding: 14px 12px 12px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .copyColumn {
+    gap: 32px;
+  }
+
+  .copyStack {
+    gap: 18px;
+  }
+
+  .secondaryLead {
+    max-width: 100%;
+  }
+
+  .featuresHeading {
+    flex-wrap: wrap;
+  }
+
+  .externalLinkButton {
+    width: 100%;
+    min-height: 52px;
+    font-size: 12px;
+  }
+}

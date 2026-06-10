@@ -1,0 +1,61 @@
+.button {
+  --burger-color: #1a1a1a;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 48px;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: var(--burger-color);
+}
+
+.light {
+  --burger-color: #1a1a1a;
+}
+
+.label {
+  color: var(--burger-color);
+  font-family: var(--font-gt-pro-regular);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.icon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.line {
+  position: absolute;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-brand-red-light);
+  transform-origin: center;
+}
+
+.line:nth-child(1) {
+  top: 4px;
+}
+
+.line:nth-child(2) {
+  top: 11px;
+}
+
+.line:nth-child(3) {
+  top: 18px;
+}
+
+@media (max-width: 767px) {
+  .label {
+    display: none;
+  }
+}
