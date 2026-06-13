@@ -4,6 +4,7 @@
   --font-gt-pro-light: 'GT Eesti Pro Display-light', sans-serif, serif;
   --font-gt-pro-regular: 'GT Eesti Pro Display-regular', sans-serif, serif;
   --font-gt-pro-bold: 'GT Eesti Pro Display-bold', sans-serif, serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
 
   --color-brand-white: #ffffff;
   --color-brand-red: #e30613;
@@ -12,6 +13,16 @@
   --color-brand-dark: #1a1a1a;
   --color-brand-gray: #f5f5f5;
   --color-brand-dark-gray: #2a2a2a;
+
+  --color-cream: #F1EBDC;
+  --color-paper: #FBF8F1;
+  --color-ink: #2A2D26;
+  --color-ink-soft: #5C5E51;
+  --color-green: #4F6B52;
+  --color-green-deep: #33492F;
+  --color-green-mist: #DDE6D2;
+  --color-muted: #8E8E7C;
+  --color-ball: #C9E04A;
 
   --gradient-brand: linear-gradient(135deg, #ff2d2d 0%, #a80000 100%);
   --gradient-glow: radial-gradient(circle, rgba(255, 45, 45, 0.4) 0%, rgba(26, 26, 26, 0) 70%);
