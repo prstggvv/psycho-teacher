@@ -23,7 +23,6 @@
   font-size: clamp(40px, 6vw, 82px);
 }
 
-/* ── bento grid ── */
 
 .bento {
   display: grid;
