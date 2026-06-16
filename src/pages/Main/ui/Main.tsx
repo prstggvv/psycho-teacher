@@ -6,6 +6,7 @@ import { WhatIDoing } from "../../../components/MainComponents/MainPageComponent
 import { Problems } from "../../../components/MainComponents/MainPageComponents/Problems";
 import { Contact } from "../../../components/MainComponents/MainPageComponents/Contact";
 import { Footer } from "../../../components/Footer";
+import { PhotoSection } from "../../../components/MainComponents/MainPageComponents/PhotoSection";
 
 interface MainProps {
   className?: string;
@@ -17,6 +18,7 @@ const Main = ({ className }: MainProps) => {
       <Hero />
       <About />
       <WhatIDoing />
+      <PhotoSection />
       <Problems />
       <Contact />
       <Footer />
