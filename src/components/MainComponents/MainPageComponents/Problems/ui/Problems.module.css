@@ -15,7 +15,7 @@
 
 .title {
   margin: 0;
-  max-width: 14ch;
+  max-width: 560px;
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: 72px;
@@ -24,13 +24,14 @@
   color: var(--color-ink);
 }
 
-/* ── grid ── */
+/* ── strict swiss grid: hairline rules, no gaps ── */
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   margin-top: 56px;
-  border-top: 1px solid rgba(42, 45, 38, 0.13);
+  border-top: 1px solid rgba(42, 45, 38, 0.16);
+  border-left: 1px solid rgba(42, 45, 38, 0.16);
 }
 
 /* ── card ── */
@@ -39,14 +40,16 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 32px;
-  padding: 24px 36px;
-  border-bottom: 1px solid rgba(42, 45, 38, 0.13);
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: 320px;
+  padding: 32px;
+  border-right: 1px solid rgba(42, 45, 38, 0.16);
+  border-bottom: 1px solid rgba(42, 45, 38, 0.16);
 }
 
-.cardLight {
+.cardCream {
   background: var(--color-cream);
 }
 
@@ -54,27 +57,102 @@
   background: var(--color-green-deep);
 }
 
-.dots {
+.cardGhost {
+  background: transparent;
+}
+
+/* ── hover fill: a flat panel wipes up from the bottom ── */
+
+.fill {
   position: absolute;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  opacity: 0.1;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.9) 1px, transparent 1px);
-  background-size: 18px 18px;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.36, 1);
 }
 
-/* ── number ── */
+.cardCream .fill,
+.cardGhost .fill {
+  background: var(--color-green-deep);
+}
 
-.num {
-  flex: none;
-  width: 72px;
+.cardDark .fill {
+  background: var(--color-ball);
+}
+
+.card:hover .fill {
+  transform: scaleY(1);
+}
+
+/* ── big outlined number fills the empty ghost cards ── */
+
+.watermark {
+  position: absolute;
+  right: -8px;
+  bottom: -52px;
+  z-index: 0;
+  pointer-events: none;
   font-family: var(--font-serif);
   font-weight: 500;
-  font-size: 46px;
+  font-size: 240px;
   line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(79, 107, 82, 0.2);
+  user-select: none;
 }
 
-.cardLight .num {
+/* ── top hairline that draws in ── */
+
+.rule {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 2px;
+  transform-origin: left;
+}
+
+.cardCream .rule {
+  background: var(--color-green);
+}
+
+.cardDark .rule {
+  background: var(--color-ball);
+}
+
+.cardGhost .rule {
+  background: var(--color-green);
+}
+
+/* ── top row: number + arrow ── */
+
+.cardTop {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.numMask {
+  display: block;
+  overflow: hidden;
+}
+
+.num {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 1;
+  transition: color 0.45s ease;
+}
+
+.cardCream .num {
   color: var(--color-green);
 }
 
@@ -82,19 +160,32 @@
   color: var(--color-ball);
 }
 
+.cardGhost .num {
+  color: var(--color-green);
+}
+
+.card:hover .num {
+  color: #fff;
+}
+
+.cardDark:hover .num {
+  color: var(--color-green-deep);
+}
+
 /* ── title ── */
 
 .cardTitle {
   position: relative;
   z-index: 1;
-  flex: 1;
   margin: 0;
+  max-width: 320px;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.4;
+  transition: color 0.45s ease;
 }
 
-.cardLight .cardTitle {
+.cardCream .cardTitle {
   color: var(--color-ink);
 }
 
@@ -102,11 +193,21 @@
   color: #fff;
 }
 
+.cardGhost .cardTitle {
+  color: var(--color-ink);
+}
+
+.card:hover .cardTitle {
+  color: #fff;
+}
+
+.cardDark:hover .cardTitle {
+  color: var(--color-green-deep);
+}
+
 /* ── arrow ── */
 
 .arrowWrap {
-  position: relative;
-  z-index: 1;
   flex: none;
   display: inline-flex;
 }
@@ -114,34 +215,30 @@
 .arrow {
   display: grid;
   place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  transition: transform 0.25s, background 0.25s, border-color 0.25s, color 0.25s;
+  width: 42px;
+  height: 42px;
+  transition: transform 0.3s ease, color 0.45s ease;
 }
 
-.cardLight .arrow {
-  border: 1.5px solid rgba(42, 45, 38, 0.18);
+.cardCream .arrow {
   color: var(--color-green);
 }
 
 .cardDark .arrow {
-  border: 1.5px solid rgba(255, 255, 255, 0.28);
   color: #fff;
+}
+
+.cardGhost .arrow {
+  color: var(--color-green);
 }
 
 .card:hover .arrow {
   transform: rotate(45deg);
-}
-
-.cardLight:hover .arrow {
-  background: var(--color-green);
-  border-color: var(--color-green);
   color: #fff;
 }
 
 .cardDark:hover .arrow {
-  background: rgba(255, 255, 255, 0.15);
+  color: var(--color-green-deep);
 }
 
 /* ── responsive ── */
@@ -153,6 +250,10 @@
 
   .title {
     font-size: 56px;
+  }
+
+  .card {
+    min-height: 280px;
   }
 }
 
@@ -170,20 +271,26 @@
   }
 
   .grid {
+    grid-template-columns: 1fr;
     margin-top: 40px;
   }
 
   .card {
-    gap: 16px;
-    padding: 18px 22px;
+    min-height: 200px;
+    gap: 32px;
+    padding: 26px 24px;
   }
 
   .num {
-    width: 48px;
-    font-size: 34px;
+    font-size: 52px;
   }
 
   .cardTitle {
-    font-size: 15px;
+    font-size: 17px;
+  }
+
+  .watermark {
+    font-size: 170px;
+    bottom: -36px;
   }
 }

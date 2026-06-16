@@ -31,8 +31,6 @@
   gap: clamp(10px, 1.2vw, 16px);
 }
 
-/* ── base card ── */
-
 .card {
   position: relative;
   overflow: hidden;
@@ -57,18 +55,15 @@
   color: #fff;
 }
 
-/* ── numbers ── */
 
 .num {
-  font-family: var(--font-serif);
+  font-family: var(--font-gt-pro-light);
   font-weight: 500;
   font-size: clamp(30px, 3vw, 40px);
   line-height: 1;
   color: var(--color-green);
   transition: color 0.45s ease;
 }
-
-/* ── card title ── */
 
 .cardTitle {
   margin: 0;
@@ -79,8 +74,6 @@
   max-width: 24ch;
   transition: color 0.45s ease;
 }
-
-/* ── feature card ── */
 
 .cardFeature {
   background: var(--color-green-deep);
@@ -105,8 +98,7 @@
   position: relative;
   z-index: 1;
   color: #fff;
-  font-family: var(--font-serif);
-  font-weight: 500;
+  font-family: var(--font-gt-pro-regular);
   font-size: clamp(30px, 3.2vw, 44px);
   line-height: 1.08;
   max-width: 15ch;
