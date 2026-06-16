@@ -10,7 +10,6 @@
   padding: clamp(90px, 16vh, 200px) clamp(20px, 5vw, 64px);
 }
 
-/* ── Header ─────────────────────────────── */
 .head {
   display: flex;
   align-items: baseline;
@@ -34,7 +33,6 @@
   color: var(--color-muted);
 }
 
-/* ── Gallery ────────────────────────────── */
 .gallery {
   display: flex;
   flex-direction: column;
@@ -54,7 +52,6 @@
 .alignEnd {
   max-width: clamp(260px, 44vw, 540px);
   margin-left: auto;
-  /* pull up to interlock whitespace — designer-portfolio rhythm */
   margin-top: clamp(-70px, -7vw, -40px);
 }
 
@@ -64,7 +61,6 @@
   margin-right: auto;
 }
 
-/* ── Image frame ────────────────────────── */
 .frame {
   position: relative;
   overflow: hidden;
@@ -77,15 +73,9 @@
   width: 100%;
   height: auto;
   object-fit: cover;
-  transition: transform 0.7s cubic-bezier(0.23, 1, 0.36, 1);
   will-change: transform;
 }
 
-.figure:hover .img {
-  transform: scale(1.03);
-}
-
-/* ── Caption ────────────────────────────── */
 .caption {
   display: flex;
   align-items: center;
@@ -113,7 +103,6 @@
   color: var(--color-ink-soft);
 }
 
-/* ── Responsive ─────────────────────────── */
 @media (max-width: 680px) {
   .gallery {
     gap: clamp(56px, 18vw, 90px);
@@ -130,6 +119,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+
   .img,
   .figure:hover .img {
     transition: none;
