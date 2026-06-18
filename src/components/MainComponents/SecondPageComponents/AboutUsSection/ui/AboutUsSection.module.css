@@ -52,7 +52,12 @@
   text-wrap: pretty;
 }
 
-/* ====== spotlight ====== */
+.list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .spotlight {
   display: flex;
   align-items: flex-start;
@@ -60,15 +65,10 @@
   padding: 110px 0;
 }
 
-.spotlight+.spotlight {
-  border-top: 1px solid rgba(42, 45, 38, 0.14);
-}
-
 .reverse {
   flex-direction: row-reverse;
 }
 
-/* text column */
 .text {
   width: 320px;
   flex-shrink: 0;
@@ -343,7 +343,6 @@
   color: var(--color-green);
 }
 
-/* ====== responsive ====== */
 @media (max-width: 1024px) {
   .container {
     padding: 0 32px;
