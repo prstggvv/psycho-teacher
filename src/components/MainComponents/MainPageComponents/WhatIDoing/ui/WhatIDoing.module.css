@@ -15,8 +15,7 @@
 
 .title {
   margin: 0;
-  font-family: var(--font-serif);
-  font-weight: 500;
+  font-family: var(--font-gt-pro-regular);
   color: var(--color-ink);
   letter-spacing: -0.01em;
   line-height: 0.98;
@@ -70,6 +69,7 @@
   font-weight: 600;
   font-size: clamp(17px, 1.45vw, 20px);
   line-height: 1.32;
+  font-family: var(--font-gt-pro-regular);
   color: var(--color-ink);
   max-width: 24ch;
   transition: color 0.45s ease;
@@ -130,6 +130,7 @@
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.18em;
+  font-family: var(--font-gt-pro-light);
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.62);
 }
@@ -157,7 +158,6 @@
   padding: 7px 15px;
 }
 
-/* ── wide card ── */
 
 .cardWide {
   background: var(--color-green-mist);
@@ -184,7 +184,7 @@
 }
 
 .cardWide .cardTitle {
-  font-family: var(--font-serif);
+  font-family: var(--font-gt-pro-regular);
   font-weight: 500;
   font-size: clamp(26px, 2.8vw, 38px);
   line-height: 1.12;
@@ -197,7 +197,6 @@
   color: #fff;
 }
 
-/* ── mobile ── */
 
 @media (max-width: 759px) {
   .bento {
