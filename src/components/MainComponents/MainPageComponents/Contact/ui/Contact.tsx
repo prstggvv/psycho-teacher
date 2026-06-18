@@ -8,12 +8,10 @@ interface IContactProps {
   className?: string;
 }
 
-// Contact details — edit here, the markup reads from these values.
 const PHONE_DISPLAY = '+7 978 005 252';
 const PHONE_HREF = 'tel:+7978005252';
 const EMAIL = 'erkeeva.sport@gmail.com';
 
-// Title reveals line by line, each sliding up from behind a mask.
 const titleGroup: Variants = createStaggerContainer(0.14, 0.05);
 
 const titleLine: Variants = {
@@ -21,19 +19,16 @@ const titleLine: Variants = {
   visible: { y: '0%', transition: { duration: 0.8, ease: MOTION_EASE } },
 };
 
-// The divider grows out from the left.
 const dividerVariants: Variants = {
   hidden: { scaleX: 0 },
   visible: { scaleX: 1, transition: { duration: 0.9, ease: MOTION_EASE } },
 };
 
-// The photo settles in from a gentle zoom.
 const photoVariants: Variants = {
   hidden: { opacity: 0, scale: 1.08 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: MOTION_EASE } },
 };
 
-// Rows cascade, each releasing its label and value in turn.
 const rowsGroup: Variants = createStaggerContainer(0.12, 0.1);
 
 const rowVariants: Variants = {
