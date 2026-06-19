@@ -55,11 +55,6 @@ export const AboutUsSection = ({ className }: IAboutUsSection) => {
           whileInView="visible"
           viewport={VIEWPORT_ONCE}
         >
-          <div className={classNames(cls.head, {}, [])}>
-            <span className={classNames(cls.headRule, {}, [])} />
-            <span className={classNames(cls.headLabel, {}, [])}>О нас</span>
-          </div>
-
           <h2 className={classNames(cls.title, {}, [])}>
             Два тренера —
             <br />

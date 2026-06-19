@@ -3,6 +3,7 @@ import { classNames } from '../../../shared/lib/classNames/classNames';
 import { HeroSecondSection } from '../../../components/MainComponents/SecondPageComponents/HeroSecondSection';
 import { AboutUsSection } from '../../../components/MainComponents/SecondPageComponents/AboutUsSection';
 import { WaySection } from '../../../components/MainComponents/SecondPageComponents/WaySection';
+import { Education } from '../../../components/MainComponents/SecondPageComponents/Education';
 
 interface ISecondMainPageAsync {
   className?: string;
@@ -14,6 +15,7 @@ const SecondMainPage = ({ className }: ISecondMainPageAsync) => {
       <HeroSecondSection />
       <AboutUsSection />
       <WaySection />
+      <Education />
     </main>
   )
 };
