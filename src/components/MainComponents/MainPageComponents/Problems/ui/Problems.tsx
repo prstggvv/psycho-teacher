@@ -2,6 +2,7 @@ import { motion, type Variants } from 'framer-motion';
 import cls from './Problems.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { MOTION_EASE, VIEWPORT_ONCE, createStaggerContainer } from '../../../../../shared/lib/motion';
+import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
 
 interface IProblemsProps {
   className?: string;
@@ -15,8 +16,7 @@ interface IProblem {
   variant: CardVariant;
 }
 
-// Mirrored checkerboard across a 3-column grid: ghost cards run down the
-// middle column, the solid cards balance each other diagonally.
+
 const problems: IProblem[] = [
   { num: '01', title: 'Адаптация к нагрузкам', variant: 'cream' },
   { num: '02', title: 'Готовность к спортивной деятельности — уровень энергии, самоотдача, снятие напряжения', variant: 'ghost' },
@@ -25,11 +25,6 @@ const problems: IProblem[] = [
   { num: '05', title: 'Восстановление после травм и поражений', variant: 'ghost' },
   { num: '06', title: 'Потеря мотивации', variant: 'cream' },
 ];
-
-const titleVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: MOTION_EASE } },
-};
 
 const gridVariants: Variants = createStaggerContainer(0.12, 0.1);
 
@@ -88,16 +83,11 @@ export const Problems = ({ className }: IProblemsProps) => {
     <section id="problems" className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.inner, {}, [])}>
         <header className={classNames(cls.head, {}, [])}>
-          <motion.h2
-            className={classNames(cls.title, {}, [])}
-            variants={titleVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-          >
-            Какие проблемы решит спортивная психология?
-          </motion.h2>
         </header>
+        <TitleFirstPage
+          title='Какие проблемы решает спортивная психология?'
+          subtitle='01 - 06'
+        />
 
         <motion.div
           className={classNames(cls.grid, {}, [])}

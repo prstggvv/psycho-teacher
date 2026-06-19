@@ -29,6 +29,7 @@ export const HeroSecondSection = ({ className }: IHeroSecondSectionProps) => {
           alt="Тренер и юная теннисистка дают пять после тренировки"
         />
       </div>
+      <div className={classNames(cls.gridLines)}></div>
 
       <div className={classNames(cls.inner, {}, [])}>
         <motion.div className={classNames(cls.tag, {}, [])} {...fadeUp(0.15)}>

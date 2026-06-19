@@ -1,0 +1,22 @@
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: clamp(18px, 2vw, 26px);
+  margin-bottom: clamp(60px, 9vw, 30px);
+  border-bottom: 1px solid rgba(42, 45, 38, 0.16);
+}
+
+.kicker,
+.range {
+  font-family: var(--font-gt-pro-regular);
+  font-size: clamp(11px, 1vw, 13px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.range {
+  color: var(--color-muted);
+}

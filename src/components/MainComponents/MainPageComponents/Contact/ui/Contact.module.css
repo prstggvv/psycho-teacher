@@ -9,10 +9,13 @@
   padding: 100px 64px 80px;
 }
 
-/* ── header ── */
 
 .header {
   margin-bottom: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .title {

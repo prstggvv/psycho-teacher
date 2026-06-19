@@ -6,6 +6,7 @@ import photoOne from '../../../../../shared/assets/images/photoSection/sesta_one
 import photoTwo from '../../../../../shared/assets/images/photoSection/sestra_second.WEBP';
 import photoThree from '../../../../../shared/assets/images/photoSection/sestra_three.WEBP';
 import photoFour from '../../../../../shared/assets/images/photoSection/sestra_four.WEBP';
+import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
 
 interface IPhotoSectionProps {
   className?: string;
@@ -50,10 +51,10 @@ export const PhotoSection = ({ className }: IPhotoSectionProps) => {
   return (
     <section className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.inner, {}, [])}>
-        <div className={classNames(cls.head, {}, [])}>
-          <span className={classNames(cls.kicker, {}, [])}>Фотографии</span>
-          <span className={classNames(cls.range, {}, [])}>(01 — 04)</span>
-        </div>
+        <TitleFirstPage
+          title='Фотографии'
+          subtitle='01 - 04'
+        />
 
         <div className={classNames(cls.gallery, {}, [])}>
           {photos.map((photo) => (

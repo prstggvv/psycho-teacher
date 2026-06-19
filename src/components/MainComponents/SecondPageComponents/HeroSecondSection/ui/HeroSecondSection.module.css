@@ -22,7 +22,6 @@
   display: block;
 }
 
-/* hairline brutalist grid overlay */
 .gridLines {
   position: absolute;
   inset: 0;
