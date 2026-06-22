@@ -4,6 +4,7 @@ import { HeroSecondSection } from '../../../components/MainComponents/SecondPage
 import { AboutUsSection } from '../../../components/MainComponents/SecondPageComponents/AboutUsSection';
 import { WaySection } from '../../../components/MainComponents/SecondPageComponents/WaySection';
 import { Education } from '../../../components/MainComponents/SecondPageComponents/Education';
+import { Footer } from '../../../components/Footer';
 
 interface ISecondMainPageAsync {
   className?: string;
@@ -16,6 +17,7 @@ const SecondMainPage = ({ className }: ISecondMainPageAsync) => {
       <AboutUsSection />
       <WaySection />
       <Education />
+      <Footer />
     </main>
   )
 };

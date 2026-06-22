@@ -4,6 +4,7 @@ import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { fadeUp, VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
 import sashaPhoto from '../../../../../shared/assets/images/secondPage/about/sasha.jpg';
 import ernestPhoto from '../../../../../shared/assets/images/secondPage/about/ernest.jpg';
+import TitleSecondPage from '../../../../../shared/ui/TitleSecondPage/TitleSecondPage';
 
 interface IAboutUsSection {
   className?: string;
@@ -49,23 +50,12 @@ export const AboutUsSection = ({ className }: IAboutUsSection) => {
       className={classNames(cls.about, {}, [className ?? ''])}
     >
       <div className={classNames(cls.container, {}, [])}>
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          <h2 className={classNames(cls.title, {}, [])}>
-            Два тренера —
-            <br />
-            одна команда
-          </h2>
-
-          <p className={classNames(cls.intro, {}, [])}>
-            Мы работаем с детьми каждый день: от первого знакомства с ракеткой до
-            уверенной игры на корте.
-          </p>
-        </motion.div>
+        <TitleSecondPage
+          title='Два тренера одна команда'
+          subtitle={`Мы работаем с детьми каждый день: от первого знакомства с ракеткой до
+            уверенной игры на корте.`}
+          isWhite={false}
+        />
 
         <ul className={classNames(cls.list, {}, [])}>
           {COACHES.map((coach) => (

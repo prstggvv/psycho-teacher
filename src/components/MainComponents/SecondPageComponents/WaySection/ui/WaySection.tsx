@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion
 import cls from './WaySection.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { fadeUp, VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
+import TitleSecondPage from '../../../../../shared/ui/TitleSecondPage/TitleSecondPage';
 
 interface IWaySection {
   className?: string;
@@ -126,19 +127,12 @@ export const WaySection = ({ className }: IWaySection) => {
   return (
     <section className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.container, {}, [])}>
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          <h2 className={classNames(cls.title, {}, [])}>Путь на корте</h2>
-
-          <p className={classNames(cls.sub, {}, [])}>
-            Семь лет тренерской работы — от детских лагерей Крыма до академий и
-            клубов.
-          </p>
-        </motion.div>
+        <TitleSecondPage
+          title='Путь на корте'
+          subtitle='Семь лет тренерской работы — от детских лагерей Крыма до академий и
+            клубов.'
+          isWhite={true}
+        />
 
         <div ref={trackRef} className={classNames(cls.track, {}, [])}>
           <div className={classNames(cls.court, {}, [])} aria-hidden="true">

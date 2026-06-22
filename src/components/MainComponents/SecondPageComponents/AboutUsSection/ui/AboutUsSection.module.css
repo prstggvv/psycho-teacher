@@ -32,6 +32,14 @@
   text-transform: uppercase;
 }
 
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
 .title {
   margin: 0;
   font-family: var(--font-gt-pro-bold);

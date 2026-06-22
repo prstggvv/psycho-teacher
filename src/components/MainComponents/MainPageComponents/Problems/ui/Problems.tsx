@@ -16,7 +16,6 @@ interface IProblem {
   variant: CardVariant;
 }
 
-
 const problems: IProblem[] = [
   { num: '01', title: 'Адаптация к нагрузкам', variant: 'cream' },
   { num: '02', title: 'Готовность к спортивной деятельности — уровень энергии, самоотдача, снятие напряжения', variant: 'ghost' },
@@ -28,7 +27,6 @@ const problems: IProblem[] = [
 
 const gridVariants: Variants = createStaggerContainer(0.12, 0.1);
 
-// Each card unmasks with a top-down clip wipe, then releases its parts in order.
 const cardVariants: Variants = {
   hidden: { opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' },
   visible: {
@@ -43,7 +41,6 @@ const cardVariants: Variants = {
   },
 };
 
-// A hairline rule draws across the top of the card.
 const ruleVariants: Variants = {
   hidden: { scaleX: 0 },
   visible: { scaleX: 1, transition: { duration: 0.6, ease: MOTION_EASE } },

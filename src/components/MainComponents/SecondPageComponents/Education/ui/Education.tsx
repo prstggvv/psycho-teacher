@@ -10,6 +10,7 @@ import {
 } from '../../../../../shared/lib/motion';
 import sashaPhoto from '../../../../../shared/assets/images/secondPage/about/sasha.jpg';
 import ernestPhoto from '../../../../../shared/assets/images/secondPage/about/ernest.jpg';
+import TitleSecondPage from '../../../../../shared/ui/TitleSecondPage/TitleSecondPage';
 
 interface IEducationProps {
   className?: string;
@@ -190,25 +191,11 @@ export const Education = ({ className }: IEducationProps) => {
   return (
     <section className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.container, {}, [])}>
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          <div className={classNames(cls.head, {}, [])}>
-            <span className={classNames(cls.headRule, {}, [])} />
-            <span className={classNames(cls.headLabel, {}, [])}>Образование</span>
-          </div>
-
-          <h2 className={classNames(cls.title, {}, [])}>
-            Дипломы и<br />квалификация
-          </h2>
-
-          <p className={classNames(cls.sub, {}, [])}>
-            Выберите тренера, чтобы посмотреть его образование, курсы и сертификаты.
-          </p>
-        </motion.div>
+        <TitleSecondPage
+          title='Дипломы и квалификация'
+          subtitle='Выберите тренера, чтобы посмотреть его образование, курсы и сертификаты.'
+          isWhite={false}
+        />
 
         <motion.div
           className={classNames(cls.tabs, {}, [])}
