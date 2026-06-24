@@ -1,8 +1,20 @@
 .section {
+  position: relative;
   background: var(--color-paper);
+  /* Tall scroll track: gives room for the pinned, scroll-driven reveal. */
+  min-height: 320vh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .inner {
+  width: 100%;
   max-width: 1240px;
   margin: 0 auto;
   padding: clamp(76px, 12vh, 160px) clamp(20px, 5vw, 64px);
@@ -13,14 +25,15 @@
   font-family: var(--font-serif);
   font-weight: 400;
   color: var(--color-ink-soft);
-  font-size: clamp(32px, 4.8vw, 66px);
-  line-height: 1.24;
+  font-size: clamp(36px, 5.6vw, 84px);
+  line-height: 1.2;
   text-wrap: pretty;
   text-align: left;
 }
 
 .word {
   display: inline-block;
+  will-change: opacity, transform;
 }
 
 .wordStrong {
@@ -31,4 +44,11 @@
 .wordHighlight {
   color: var(--color-green);
   font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .section {
+    /* Shorter track on mobile so the reveal isn't an endless scroll. */
+    min-height: 240vh;
+  }
 }

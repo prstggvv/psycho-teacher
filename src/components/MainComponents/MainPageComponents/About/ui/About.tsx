@@ -1,8 +1,7 @@
-import { Fragment } from 'react';
-import { motion, type Variants } from 'framer-motion';
+import { Fragment, useRef } from 'react';
+import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import cls from './About.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { MOTION_EASE, VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
 
 interface IAboutProps {
   className?: string;
@@ -28,63 +27,73 @@ const words: IWord[] = [
   { text: 'опытом', style: 'normal' },
   { text: 'работы', style: 'normal' },
   { text: 'более', style: 'normal' },
-  { text: '10 лет', style: 'highlight' },
+  { text: '10 лет', style: 'highlight' },
   { text: 'и', style: 'normal' },
   { text: 'спортивный', style: 'normal' },
   { text: 'психолог.', style: 'normal' },
 ];
 
-const containerVariants: Variants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.1,
-    },
-  },
+interface IWordProps {
+  word: IWord;
+  progress: MotionValue<number>;
+  range: [number, number];
+}
+
+const Word = ({ word, progress, range }: IWordProps) => {
+  const opacity = useTransform(progress, range, [0.12, 1]);
+  const y = useTransform(progress, range, [14, 0]);
+
+  return (
+    <motion.span
+      className={classNames(cls.word, {
+        [cls.wordStrong]: word.style === 'strong',
+        [cls.wordHighlight]: word.style === 'highlight',
+      }, [])}
+      style={{ opacity, y }}
+    >
+      {word.text}
+    </motion.span>
+  );
 };
 
-const wordVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: MOTION_EASE,
-    },
-  },
-};
+// The reveal completes before the very end of the scroll track so the last
+// word is fully visible while the section is still pinned.
+const REVEAL_END = 0.9;
 
 export const About = ({ className }: IAboutProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
   return (
     <section
       id="about"
+      ref={sectionRef}
       className={classNames(cls.section, {}, [className ?? ''])}
     >
-      <div className={classNames(cls.inner, {}, [])}>
-        <motion.p
-          className={classNames(cls.text, {}, [])}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          {words.map((word, i) => (
-            <Fragment key={i}>
-              <motion.span
-                className={classNames(cls.word, {
-                  [cls.wordStrong]: word.style === 'strong',
-                  [cls.wordHighlight]: word.style === 'highlight',
-                }, [])}
-                variants={wordVariants}
-              >
-                {word.text}
-              </motion.span>
-              {i < words.length - 1 && ' '}
-            </Fragment>
-          ))}
-        </motion.p>
+      <div className={classNames(cls.sticky, {}, [])}>
+        <div className={classNames(cls.inner, {}, [])}>
+          <p className={classNames(cls.text, {}, [])}>
+            {words.map((word, i) => {
+              const start = (i / words.length) * REVEAL_END;
+              const end = ((i + 1) / words.length) * REVEAL_END;
+
+              return (
+                <Fragment key={i}>
+                  <Word
+                    word={word}
+                    progress={scrollYProgress}
+                    range={[start, end]}
+                  />
+                  {i < words.length - 1 && ' '}
+                </Fragment>
+              );
+            })}
+          </p>
+        </div>
       </div>
     </section>
   );
