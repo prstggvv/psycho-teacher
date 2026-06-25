@@ -55,7 +55,6 @@
   text-wrap: pretty;
 }
 
-/* tab switch */
 .tabs {
   display: flex;
   gap: 0;
@@ -191,7 +190,6 @@
     box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* alternating pastel tones */
 .card:nth-child(4n + 1) {
   background: var(--color-cream);
 }
@@ -324,6 +322,10 @@
 
   .title {
     font-size: 40px;
+  }
+
+  .tabs {
+    flex-direction: column;
   }
 
   .grid {
