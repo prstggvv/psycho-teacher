@@ -1,7 +1,13 @@
-import { motion, type Variants } from 'framer-motion';
+import { useRef } from 'react';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  type MotionValue,
+  type MotionStyle,
+} from 'framer-motion';
 import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { MOTION_EASE, VIEWPORT_ONCE, createStaggerContainer } from '../../../../../shared/lib/motion';
 import ContactPhoto from '../../../../../shared/assets/images/contact.jpg';
 
 interface IContactProps {
@@ -12,150 +18,133 @@ const PHONE_DISPLAY = '+7 978 005 252';
 const PHONE_HREF = 'tel:+7978005252';
 const EMAIL = 'erkeeva.sport@gmail.com';
 
-const titleGroup: Variants = createStaggerContainer(0.14, 0.05);
+const TITLE = 'СВЯЖЕМСЯ';
 
-const titleLine: Variants = {
-  hidden: { y: '110%' },
-  visible: { y: '0%', transition: { duration: 0.8, ease: MOTION_EASE } },
+const LETTERS_START = 0.46;
+const LETTERS_END = 0.72;
+
+const CONTACTS_START = 0.74;
+const CONTACTS_END = 1;
+
+const contacts: { label: string; value: string; href: string }[] = [
+  { label: 'Телефон', value: PHONE_DISPLAY, href: PHONE_HREF },
+  { label: 'Почта', value: EMAIL, href: `mailto:${EMAIL}` },
+  { label: 'Telegram', value: '@erkeeva', href: '#' },
+  { label: 'ВКонтакте', value: 'erkeeva.sport', href: '#' },
+];
+
+interface ILetterProps {
+  char: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+}
+
+const Letter = ({ char, progress, range }: ILetterProps) => {
+  const y = useTransform(progress, range, ['120%', '0%']);
+  const opacity = useTransform(progress, range, [0, 1]);
+
+  return (
+    <span className={classNames(cls.letterMask, {}, [])}>
+      <motion.span className={classNames(cls.letter, {}, [])} style={{ y, opacity }}>
+        {char}
+      </motion.span>
+    </span>
+  );
 };
 
-const dividerVariants: Variants = {
-  hidden: { scaleX: 0 },
-  visible: { scaleX: 1, transition: { duration: 0.9, ease: MOTION_EASE } },
+interface IContactItemProps {
+  label: string;
+  value: string;
+  href: string;
+  index: number;
+  progress: MotionValue<number>;
+}
+
+const ContactItem = ({ label, value, href, index, progress }: IContactItemProps) => {
+  const span = (CONTACTS_END - CONTACTS_START) / contacts.length;
+  const start = CONTACTS_START + index * span;
+  const end = Math.min(CONTACTS_END, start + span * 1.6);
+
+  const opacity = useTransform(progress, [start, end], [0, 1]);
+  const y = useTransform(progress, [start, end], [28, 0]);
+
+  return (
+    <motion.a
+      className={classNames(cls.item, {}, [])}
+      href={href}
+      style={{ opacity, y }}
+      aria-label={`${label}: ${value}`}
+    >
+      <span className={classNames(cls.itemLabel, {}, [])}>
+        <span className={classNames(cls.itemIndex, {}, [])}>0{index + 1}</span>
+        {label}
+      </span>
+      <span className={classNames(cls.itemValue, {}, [])}>{value}</span>
+    </motion.a>
+  );
 };
-
-const photoVariants: Variants = {
-  hidden: { opacity: 0, scale: 1.08 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.9, ease: MOTION_EASE } },
-};
-
-const rowsGroup: Variants = createStaggerContainer(0.12, 0.1);
-
-const rowVariants: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: MOTION_EASE,
-      when: 'beforeChildren',
-      staggerChildren: 0.08,
-    },
-  },
-};
-
-const labelVariants: Variants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: MOTION_EASE } },
-};
-
-const valueVariants: Variants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: MOTION_EASE } },
-};
-
-const TelegramIcon = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M22 3 11 14" />
-    <path d="M22 3 15 21l-4-7-7-4 18-7z" />
-  </svg>
-);
 
 export const Contact = ({ className }: IContactProps) => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
+  // Photo morphs from an upward arch (dome) into a full-width rectangle that
+  // then stays in place — fed into the CSS var --p (0 → 1). It never fades.
+  const shape = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
+  const photoStyle = { '--p': shape } as MotionStyle;
+
+  // Distribute each title letter's reveal across the title timeline.
+  const span = (LETTERS_END - LETTERS_START) / TITLE.length;
+  const letters = Array.from(TITLE).map((char, i) => {
+    const start = LETTERS_START + i * span;
+    const end = Math.min(LETTERS_END, start + span * 2);
+    return { char, range: [start, end] as [number, number] };
+  });
+
   return (
-    <section id="contact" className={classNames(cls.section, {}, [className ?? ''])}>
-      <div className={classNames(cls.inner, {}, [])}>
-        <header className={classNames(cls.header, {}, [])}>
-          <motion.h2
-            className={classNames(cls.title, {}, [])}
-            variants={titleGroup}
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-          >
-            <span className={classNames(cls.titleMask, {}, [])}>
-              <motion.span className={classNames(cls.titleInner, {}, [])} variants={titleLine}>
-                Будем
-              </motion.span>
-            </span>
-            <span className={classNames(cls.titleMask, {}, [])}>
-              <motion.span className={classNames(cls.titleInner, {}, [])} variants={titleLine}>
-                <em>на связи</em>
-              </motion.span>
-            </span>
-          </motion.h2>
+    <section
+      id="contact"
+      ref={sectionRef}
+      className={classNames(cls.section, {}, [className ?? ''])}
+      aria-label="Контакты"
+    >
+      <div className={classNames(cls.sticky, {}, [])}>
+        <div className={classNames(cls.stage, {}, [])}>
+          <motion.figure className={classNames(cls.media, {}, [])} style={photoStyle}>
+            <img src={ContactPhoto} alt="Александра Еркеева" />
+            <span className={classNames(cls.scrim, {}, [])} aria-hidden="true" />
+          </motion.figure>
 
-          <motion.hr
-            className={classNames(cls.divider, {}, [])}
-            variants={dividerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={VIEWPORT_ONCE}
-          />
-        </header>
+          <div className={classNames(cls.content, {}, [])}>
+            <h2 className={classNames(cls.title, {}, [])}>
+              {letters.map((item, i) => (
+                <Letter
+                  key={i}
+                  char={item.char}
+                  progress={scrollYProgress}
+                  range={item.range}
+                />
+              ))}
+            </h2>
 
-        <motion.div
-          className={classNames(cls.photo, {}, [])}
-          variants={photoVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          <img src={ContactPhoto} alt="Александра Еркеева" />
-        </motion.div>
-
-        <motion.div
-          className={classNames(cls.rows, {}, [])}
-          variants={rowsGroup}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
-        >
-          <motion.div className={classNames(cls.row, {}, [])} variants={rowVariants}>
-            <motion.span className={classNames(cls.label, {}, [])} variants={labelVariants}>
-              Телефон
-            </motion.span>
-            <motion.span className={classNames(cls.value, {}, [])} variants={valueVariants}>
-              <a href={PHONE_HREF}>{PHONE_DISPLAY}</a>
-            </motion.span>
-          </motion.div>
-
-          <motion.div className={classNames(cls.row, {}, [])} variants={rowVariants}>
-            <motion.span className={classNames(cls.label, {}, [])} variants={labelVariants}>
-              Почта
-            </motion.span>
-            <motion.span className={classNames(cls.value, {}, [])} variants={valueVariants}>
-              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-            </motion.span>
-          </motion.div>
-
-          <motion.div className={classNames(cls.row, {}, [])} variants={rowVariants}>
-            <motion.span className={classNames(cls.label, {}, [])} variants={labelVariants}>
-              Соцсети
-            </motion.span>
-            <motion.div className={classNames(cls.value, {}, [cls.socials])} variants={valueVariants}>
-              <a
-                className={classNames(cls.socBtn, {}, [])}
-                href="#"
-                aria-label="Telegram"
-                tabIndex={0}
-              >
-                <TelegramIcon />
-                Telegram
-              </a>
-              <a
-                className={classNames(cls.socBtn, {}, [])}
-                href="#"
-                aria-label="ВКонтакте"
-                tabIndex={0}
-              >
-                <span className={classNames(cls.socVk, {}, [])}>VK</span>
-                ВКонтакте
-              </a>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            <div className={classNames(cls.contacts, {}, [])}>
+              {contacts.map((item, i) => (
+                <ContactItem
+                  key={item.label}
+                  index={i}
+                  label={item.label}
+                  value={item.value}
+                  href={item.href}
+                  progress={scrollYProgress}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
