@@ -99,7 +99,7 @@ export const Problems = ({ className }: IProblemsProps) => {
               className={classNames(cls.card, {}, [variantClass[problem.variant]])}
               variants={cardVariants}
             >
-              {/* flat colour panel that wipes up on hover */}
+
               <span className={classNames(cls.fill, {}, [])} aria-hidden="true" />
 
               {problem.variant === 'ghost' && (

@@ -14,6 +14,7 @@
   line-height: 1.04;
   text-transform: uppercase;
   color: var(--color-ink);
+  max-width: 680px;
 }
 
 .title.white {
@@ -32,4 +33,10 @@
 
 .intro.white {
   color: rgba(244, 247, 242, 0.62);
+}
+
+@media screen and (max-width: 566px) {
+  .title {
+    font-size: 36px;
+  }
 }

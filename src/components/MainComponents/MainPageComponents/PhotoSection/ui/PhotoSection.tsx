@@ -1,90 +1,90 @@
-import { motion, type Variants } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion';
 import cls from './PhotoSection.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { MOTION_EASE, VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
 import photoOne from '../../../../../shared/assets/images/photoSection/sesta_one.WEBP';
 import photoTwo from '../../../../../shared/assets/images/photoSection/sestra_second.WEBP';
 import photoThree from '../../../../../shared/assets/images/photoSection/sestra_three.WEBP';
 import photoFour from '../../../../../shared/assets/images/photoSection/sestra_four.WEBP';
-import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
 
 interface IPhotoSectionProps {
   className?: string;
 }
 
-type RevealFrom = 'left' | 'right' | 'up';
-type Align = 'start' | 'end' | 'center';
-
 interface IPhoto {
   src: string;
-  num: string;
   caption: string;
-  from: RevealFrom;
-  align: Align;
+  x: string;
+  width: string;
+  from: number;
+  to: number;
+  rotate: number;
 }
 
 const photos: IPhoto[] = [
-  { src: photoOne, num: '01', caption: 'Корт', from: 'left', align: 'start' },
-  { src: photoTwo, num: '02', caption: 'Игра', from: 'right', align: 'end' },
-  { src: photoThree, num: '03', caption: 'Фокус', from: 'up', align: 'center' },
-  { src: photoFour, num: '04', caption: 'Момент', from: 'right', align: 'end' },
+  { src: photoOne, caption: 'Корт', x: '-27vw', width: 'clamp(180px, 22vw, 340px)', from: 135, to: -150, rotate: -4 },
+  { src: photoTwo, caption: 'Игра', x: '26vw', width: 'clamp(200px, 26vw, 400px)', from: 180, to: -120, rotate: 5 },
+  { src: photoThree, caption: 'Фокус', x: '-9vw', width: 'clamp(220px, 30vw, 460px)', from: 225, to: -115, rotate: -2 },
+  { src: photoFour, caption: 'Момент', x: '31vw', width: 'clamp(160px, 19vw, 300px)', from: 270, to: -95, rotate: 6 },
 ];
 
-const REVEAL_OFFSET: Record<RevealFrom, { x?: number; y?: number }> = {
-  left: { x: -120 },
-  right: { x: 120 },
-  up: { y: 90 },
+interface IPhotoLayerProps {
+  photo: IPhoto;
+  progress: MotionValue<number>;
+}
+
+const PhotoLayer = ({ photo, progress }: IPhotoLayerProps) => {
+  const y = useTransform(progress, [0, 1], [`${photo.from}vh`, `${photo.to}vh`]);
+
+  return (
+    <motion.figure
+      className={classNames(cls.photo, {}, [])}
+      style={{
+        y,
+        x: photo.x,
+        width: photo.width,
+        rotate: photo.rotate,
+      }}
+    >
+      <div className={classNames(cls.frame, {}, [])}>
+        <img
+          className={classNames(cls.img, {}, [])}
+          src={photo.src}
+          alt={photo.caption}
+          loading="lazy"
+        />
+      </div>
+    </motion.figure>
+  );
 };
 
-const createRevealVariant = (from: RevealFrom): Variants => ({
-  hidden: { opacity: 0, scale: 0.96, ...REVEAL_OFFSET[from] },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    x: 0,
-    y: 0,
-    transition: { duration: 0.85, ease: MOTION_EASE },
-  },
-});
-
 export const PhotoSection = ({ className }: IPhotoSectionProps) => {
-  return (
-    <section className={classNames(cls.section, {}, [className ?? ''])}>
-      <div className={classNames(cls.inner, {}, [])}>
-        <TitleFirstPage
-          title='Фотографии'
-          subtitle='01 - 04'
-        />
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-        <div className={classNames(cls.gallery, {}, [])}>
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const progress = useSpring(scrollYProgress, {
+    stiffness: 120,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <section
+      ref={sectionRef}
+      className={classNames(cls.section, {}, [className ?? ''])}
+    >
+      <div className={classNames(cls.sticky, {}, [])}>
+        <div className={classNames(cls.stage, {}, [])}>
           {photos.map((photo) => (
-            <motion.figure
-              key={photo.num}
-              className={classNames(cls.figure, {
-                [cls.alignStart]: photo.align === 'start',
-                [cls.alignEnd]: photo.align === 'end',
-                [cls.alignCenter]: photo.align === 'center',
-              }, [])}
-              variants={createRevealVariant(photo.from)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={VIEWPORT_ONCE}
-            >
-              <div className={classNames(cls.frame, {}, [])}>
-                <img
-                  className={classNames(cls.img, {}, [])}
-                  src={photo.src}
-                  alt={photo.caption}
-                  loading="lazy"
-                />
-              </div>
-              <figcaption className={classNames(cls.caption, {}, [])}>
-                <span className={classNames(cls.captionNum, {}, [])}>{photo.num}</span>
-                <span className={classNames(cls.captionLine, {}, [])} aria-hidden="true" />
-                <span className={classNames(cls.captionText, {}, [])}>{photo.caption}</span>
-              </figcaption>
-            </motion.figure>
+            <PhotoLayer key={photo.caption} photo={photo} progress={progress} />
           ))}
+          <div className={classNames(cls.text, {}, [])}>
+            <h2 className={classNames(cls.title, {}, [])}>Это&nbsp;я</h2>
+          </div>
         </div>
       </div>
     </section>
