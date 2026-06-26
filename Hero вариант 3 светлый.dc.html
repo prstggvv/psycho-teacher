@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,100,400;0,120,800;0,120,900;1,100,500;1,100,800;1,120,900&family=Hanken+Grotesk:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600;1,700;1,800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; }
+  @keyframes heroRise { from { transform: translateY(115%); } to { transform: translateY(0); } }
+  @keyframes heroFade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes floatA { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(0,-22px) rotate(8deg); } }
+  @keyframes floatB { 0%,100% { transform: translate(0,0) rotate(0deg); } 50% { transform: translate(14px,18px) rotate(-10deg); } }
+  @keyframes floatC { 0%,100% { transform: translate(0,0); } 50% { transform: translate(-12px,-14px); } }
+  @keyframes blink { 0%,49% { opacity: 1; } 50%,100% { opacity: 0.15; } }
+  @keyframes drift { 0%,100% { transform: scale(1.04) translate(0,0); } 50% { transform: scale(1.06) translate(0,-18px); } }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+</style>
+<script src="./image-slot.js"></script>
+</helmet>
+
+<!-- ============ HERO — LIGHT / INVERTED ============ -->
+<div data-screen-label="Hero light" style="position:relative; width:100%; height:100vh; min-height:780px; background:#FFFFFF; overflow:hidden;">
+
+  <!-- full bleed faint photo bg -->
+  <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; z-index:1;">
+    <div style="width:560px;height:560px;border-radius:50%;background:radial-gradient(circle at 50% 40%, #ECECEC, #F2F2F2 68%, #FFFFFF);opacity:.95;animation:drift 11s ease-in-out infinite;display:flex;align-items:center;justify-content:center;">
+      <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#c4c4c4;">[ фото / 3D — фон ]</span>
+    </div>
+  </div>
+
+  <!-- center big type overlay -->
+  <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:4;">
+    <div style="overflow:hidden;"><div style="font-family:'Archivo';font-style:italic;font-weight:800;font-size:30px;letter-spacing:0.04em;color:#00C264;margin-bottom:4px;animation:heroFade 1s ease .3s both;">ただのワーニャ</div></div>
+    <div style="overflow:hidden;"><div style="font-family:'Archivo';font-weight:900;font-stretch:120%;font-size:174px;line-height:.82;letter-spacing:-0.02em;color:#0B0B0B;animation:heroRise 1.05s cubic-bezier(.2,.85,.25,1) .4s both;">PRSTGGVV</div></div>
+  </div>
+
+  <!-- floating accents -->
+  <div style="position:absolute; top:180px; left:200px; width:24px; height:24px; background:#00C264; animation:floatA 5s ease-in-out infinite; z-index:5;"></div>
+  <div style="position:absolute; bottom:210px; right:230px; width:20px; height:20px; background:#0B0B0B; animation:floatB 6.4s ease-in-out infinite; z-index:5;"></div>
+  <div style="position:absolute; top:300px; right:170px; width:14px; height:14px; background:#00C264; animation:floatC 7.2s ease-in-out infinite; z-index:5;"></div>
+
+  <!-- scroll hint -->
+  <div style="position:absolute; bottom:120px; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:8px; z-index:6; animation:bob 2.2s ease-in-out infinite;">
+    <span style="font-family:'Space Mono',monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#9a9a9a;">scroll</span>
+    <svg width="14" height="20" viewBox="0 0 14 20" fill="none" stroke="#0B0B0B" stroke-width="1.4"><path d="M7 1v15M2 11l5 5 5-5"/></svg>
+  </div>
+
+  <!-- social circles bottom center -->
+  <div style="position:absolute; bottom:54px; left:50%; transform:translateX(-50%); display:flex; gap:16px; z-index:6;">
+    <a href="#" target="_blank" style="width:52px;height:52px;border:1.5px solid #0B0B0B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0B0B0B;transition:all .35s cubic-bezier(.2,.8,.2,1);" style-hover="background:#00C264;border-color:#00C264;color:#FFFFFF;transform:translateY(-5px);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17 4.8 18 5.1 18 5.1c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+    </a>
+    <a href="#" target="_blank" style="width:52px;height:52px;border:1.5px solid #0B0B0B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0B0B0B;transition:all .35s cubic-bezier(.2,.8,.2,1);" style-hover="background:#00C264;border-color:#00C264;color:#FFFFFF;transform:translateY(-5px);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 15.6l-.36 4.06c.52 0 .74-.22 1.01-.49l2.43-2.32 5.04 3.69c.92.51 1.58.24 1.83-.85l3.32-15.56c.3-1.36-.49-1.9-1.39-1.56L1.18 9.32C-.15 9.85-.13 10.6.95 10.93l5.02 1.56L17.6 5.2c.55-.36 1.05-.16.64.2L9.78 15.6z"/></svg>
+    </a>
+    <a href="#" target="_blank" style="width:52px;height:52px;border:1.5px solid #0B0B0B;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0B0B0B;font-family:'Archivo';font-weight:900;font-size:17px;transition:all .35s cubic-bezier(.2,.8,.2,1);" style-hover="background:#00C264;border-color:#00C264;color:#FFFFFF;transform:translateY(-5px);">VK</a>
+  </div>
+</div>
+
+<!-- ============ ABOUT — SCROLLYTELLING ============ -->
+<section data-screen-label="About" ref="{{ setSection }}" style="position:relative; height:260vh; background:#EFEDE5;">
+  <div style="position:sticky; top:0; height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 8%; box-sizing:border-box; overflow:hidden;">
+
+    <!-- huge word-by-word color-reveal text -->
+    <div ref="{{ setText }}" style="max-width:1140px; text-align:center; text-transform:uppercase; font-family:'Hanken Grotesk',sans-serif; font-weight:700; font-size:clamp(30px,4.6vw,60px); line-height:1.22; letter-spacing:-0.005em;">
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">I'm</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em; font-style:italic; font-weight:800;">prstggvv</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">—</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">a</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">web</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">developer</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">from</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">Crimea</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">who</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">basically</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">lives</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">inside</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.18em; font-family:'Space Mono',monospace; text-transform:none; font-size:0.82em; font-weight:700;">{ curly</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em; font-family:'Space Mono',monospace; text-transform:none; font-size:0.82em; font-weight:700;">braces }</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">and</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">turns</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">coffee</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">into</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">components.</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">I</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">build</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">fast,</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em; font-style:italic; font-weight:800;">weird</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">and</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">beautiful</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">things</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">for</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">the</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">browser,</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">and</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">still</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">grin</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">when</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em; font-family:'Space Mono',monospace; text-transform:none; font-size:0.82em; font-weight:700;">console.log()</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">finally</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">prints</span>
+      <span data-word data-color="#6B2D22" style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em; font-style:italic; font-weight:800;">exactly</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">what</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">it</span>
+      <span data-word style="display:inline-block; color:#C8C3B6; transform:translateY(8px); will-change:color,transform; margin-right:0.3em;">should.</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ WORKS — each block rises from a band & expands on scroll ============ -->
+<div data-screen-label="Works" ref="{{ setWorks }}" style="position:relative; background:#EFEDE5;">
+
+  <!-- PROJECT 01 -->
+  <section data-proj style="position:relative; height:200vh; background:#EFEDE5;">
+    <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#EFEDE5;">
+      <div data-frame style="position:relative; width:40%; height:12vh; overflow:hidden; background:#0B0B0B; will-change:width,height;">
+        <image-slot id="work-1" data-img shape="rect" fit="cover" placeholder="Перетащите фото работы 01" style="position:absolute; left:-9%; top:-9%; width:118%; height:118%; will-change:transform;"></image-slot>
+        <div data-scrim style="position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(8,8,10,.58), rgba(8,8,10,.18) 55%, rgba(8,8,10,0)); opacity:0; will-change:opacity;"></div>
+      </div>
+      <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; pointer-events:none; text-align:center;">
+        <div data-client style="opacity:0; transform:translateY(16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Studio Nord</div>
+        <div style="overflow:hidden; padding:0 4%;"><div data-name style="transform:translateY(115%); will-change:transform; font-family:'Archivo'; font-weight:900; font-stretch:120%; font-size:clamp(54px,13vw,210px); line-height:.86; letter-spacing:-0.02em; color:#EFEDE5;">AURORA</div></div>
+        <div data-type style="opacity:0; transform:translateY(-16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Interactive site</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT 02 -->
+  <section data-proj style="position:relative; height:200vh; background:#EFEDE5;">
+    <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#EFEDE5;">
+      <div data-frame style="position:relative; width:40%; height:12vh; overflow:hidden; background:#0B0B0B; will-change:width,height;">
+        <image-slot id="work-2" data-img shape="rect" fit="cover" placeholder="Перетащите фото работы 02" style="position:absolute; left:-9%; top:-9%; width:118%; height:118%; will-change:transform;"></image-slot>
+        <div data-scrim style="position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(8,8,10,.58), rgba(8,8,10,.18) 55%, rgba(8,8,10,0)); opacity:0; will-change:opacity;"></div>
+      </div>
+      <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; pointer-events:none; text-align:center;">
+        <div data-client style="opacity:0; transform:translateY(16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Fintech Labs</div>
+        <div style="overflow:hidden; padding:0 4%;"><div data-name style="transform:translateY(115%); will-change:transform; font-family:'Archivo'; font-weight:900; font-stretch:120%; font-size:clamp(54px,13vw,210px); line-height:.86; letter-spacing:-0.02em; color:#EFEDE5;">MERIDIAN</div></div>
+        <div data-type style="opacity:0; transform:translateY(-16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Web platform</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECT 03 -->
+  <section data-proj style="position:relative; height:200vh; background:#EFEDE5;">
+    <div style="position:sticky; top:0; height:100vh; overflow:hidden; display:flex; align-items:center; justify-content:center; background:#EFEDE5;">
+      <div data-frame style="position:relative; width:40%; height:12vh; overflow:hidden; background:#0B0B0B; will-change:width,height;">
+        <image-slot id="work-3" data-img shape="rect" fit="cover" placeholder="Перетащите фото работы 03" style="position:absolute; left:-9%; top:-9%; width:118%; height:118%; will-change:transform;"></image-slot>
+        <div data-scrim style="position:absolute; inset:0; background:radial-gradient(ellipse at center, rgba(8,8,10,.58), rgba(8,8,10,.18) 55%, rgba(8,8,10,0)); opacity:0; will-change:opacity;"></div>
+      </div>
+      <div style="position:absolute; inset:0; z-index:3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; pointer-events:none; text-align:center;">
+        <div data-client style="opacity:0; transform:translateY(16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Maison Kô</div>
+        <div style="overflow:hidden; padding:0 4%;"><div data-name style="transform:translateY(115%); will-change:transform; font-family:'Archivo'; font-weight:900; font-stretch:120%; font-size:clamp(54px,13vw,210px); line-height:.86; letter-spacing:-0.02em; color:#EFEDE5;">OBSCURA</div></div>
+        <div data-type style="opacity:0; transform:translateY(-16px); will-change:opacity,transform; font-family:'Space Mono',monospace; font-size:13px; letter-spacing:0.26em; text-transform:uppercase; color:#00C264;">Art direction + build</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  setSection = (el) => { this.sectionEl = el; };
+  setText = (el) => { this.textEl = el; this.words = el ? Array.from(el.querySelectorAll('[data-word]')) : []; };
+  setWorks = (el) => {
+    this.worksEl = el;
+    this.projs = el ? Array.from(el.querySelectorAll('[data-proj]')).map(sec => ({
+      el: sec,
+      frame: sec.querySelector('[data-frame]'),
+      img: sec.querySelector('[data-img]'),
+      scrim: sec.querySelector('[data-scrim]'),
+      client: sec.querySelector('[data-client]'),
+      name: sec.querySelector('[data-name]'),
+      type: sec.querySelector('[data-type]'),
+    })) : [];
+  };
+  easeIO(x) { x = Math.min(Math.max(x, 0), 1); return x * x * (3 - 2 * x); }
+  base = [200, 195, 182];
+  _tc(w) { if (!w._t) { const h = (w.dataset.color || '#1A1714').replace('#',''); w._t = [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; } return w._t; }
+
+  componentDidMount() {
+    this._raf = null;
+    this.onScroll = () => {
+      // keep the inertia target synced when scroll came from elsewhere (scrollbar, anchor)
+      if (!this._sraf && this.target != null) { this.target = this.current = window.scrollY; }
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this._raf = null; this.update(); });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll, { passive: true });
+    this.update();
+    this.initSmooth();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('resize', this.onScroll);
+    if (this._raf) cancelAnimationFrame(this._raf);
+    if (this.onWheel) window.removeEventListener('wheel', this.onWheel);
+    if (this.onTouchStart) window.removeEventListener('touchstart', this.onTouchStart);
+    if (this.onTouchMove) window.removeEventListener('touchmove', this.onTouchMove);
+    if (this._sraf) cancelAnimationFrame(this._sraf);
+  }
+
+  // ---- heavy / molasses inertia scroll (Lenis-style native-position lerp) ----
+  // hijacks wheel + touch, eases the real scroll position toward a target so
+  // sticky / scroll-driven sections keep working. lower EASE = heavier/slower.
+  initSmooth() {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia || !window.matchMedia('(pointer:fine)').matches) {
+      // touch devices: still ease, but lighter so it doesn't feel laggy
+      this._ease = 0.12;
+    } else {
+      this._ease = 0.062; // desktop wheel — thick & slow
+    }
+    this.target = window.scrollY || window.pageYOffset || 0;
+    this.current = this.target;
+    const maxY = () => Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+    this.onWheel = (e) => {
+      if (e.ctrlKey) return;                 // let pinch-zoom through
+      e.preventDefault();
+      const d = e.deltaMode === 1 ? e.deltaY * 16 : (e.deltaMode === 2 ? e.deltaY * window.innerHeight : e.deltaY);
+      this.target = Math.min(Math.max(this.target + d, 0), maxY());
+      this.runSmooth();
+    };
+    window.addEventListener('wheel', this.onWheel, { passive: false });
+
+    let ty = 0;
+    this.onTouchStart = (e) => { ty = e.touches[0].clientY; this.target = window.scrollY; this.current = this.target; };
+    this.onTouchMove = (e) => {
+      const y = e.touches[0].clientY; const d = (ty - y) * 1.7; ty = y;
+      e.preventDefault();
+      this.target = Math.min(Math.max(this.target + d, 0), maxY());
+      this.runSmooth();
+    };
+    window.addEventListener('touchstart', this.onTouchStart, { passive: true });
+    window.addEventListener('touchmove', this.onTouchMove, { passive: false });
+  }
+
+  runSmooth() {
+    if (this._sraf) return;
+    const tick = () => {
+      const diff = this.target - this.current;
+      if (Math.abs(diff) < 0.35) {
+        this.current = this.target;
+        window.scrollTo(0, this.current);
+        this._sraf = null;
+        return;
+      }
+      this.current += diff * this._ease;
+      window.scrollTo(0, this.current);
+      this._sraf = requestAnimationFrame(tick);
+    };
+    this._sraf = requestAnimationFrame(tick);
+  }
+
+  clamp(v) { return Math.min(Math.max(v, 0), 1); }
+
+  update() {
+    const el = this.sectionEl;
+    if (!el) return;
+    const vh = window.innerHeight;
+    const rect = el.getBoundingClientRect();
+    const total = rect.height - vh;
+    const p = total > 0 ? this.clamp(-rect.top / total) : 0;
+
+    // word-by-word color reveal (faint warm gray -> target color), reading order
+    const textP = this.clamp((p - 0.04) / 0.82);
+    if (this.words) {
+      const n = this.words.length;
+      this.words.forEach((w, i) => {
+        const lp = this.clamp((textP - (i / n) * 0.82) / 0.16);
+        const e = 1 - Math.pow(1 - lp, 3); // easeOutCubic
+        const t = this._tc(w);
+        const r = Math.round(this.base[0] + (t[0] - this.base[0]) * e);
+        const g = Math.round(this.base[1] + (t[1] - this.base[1]) * e);
+        const b = Math.round(this.base[2] + (t[2] - this.base[2]) * e);
+        w.style.color = `rgb(${r},${g},${b})`;
+        w.style.transform = `translateY(${((1 - e) * 8).toFixed(2)}px)`;
+      });
+    }
+
+    // works — independent blocks in normal flow. Each rises as a centre band the
+    // moment it peeks at the bottom, expands to fullscreen as it scrolls up,
+    // holds full (sticky pin), then scrolls away. Next block repeats. No overlay.
+    if (this.projs) {
+      this.projs.forEach(P => {
+        if (!P.frame) return;
+        const top = P.el.getBoundingClientRect().top / vh;   // section top, in viewport units
+        // band appears when its centre reaches the bottom edge (top≈0.5), full just past pin
+        const e = this.easeIO(this.clamp((0.5 - top) / 0.9));
+        const w = 40 + 60 * e;
+        const h = 12 + 88 * e;
+        P.frame.style.width = w.toFixed(2) + '%';
+        P.frame.style.height = h.toFixed(2) + 'vh';
+        if (P.img) P.img.style.transform = `translateY(${((e - 0.5) * vh * 0.08).toFixed(1)}px)`;
+        if (P.scrim) P.scrim.style.opacity = this.clamp((e - 0.28) / 0.5).toFixed(3);
+        const tv = this.easeIO(this.clamp((e - 0.5) / 0.42));
+        if (P.name) P.name.style.transform = `translateY(${((1 - tv) * 115).toFixed(2)}%)`;
+        if (P.client) { P.client.style.opacity = tv.toFixed(3); P.client.style.transform = `translateY(${((1 - tv) * 16).toFixed(1)}px)`; }
+        if (P.type) { P.type.style.opacity = tv.toFixed(3); P.type.style.transform = `translateY(${(-(1 - tv) * 16).toFixed(1)}px)`; }
+      });
+    }
+  }
+
+  renderVals() {
+    return { setSection: this.setSection, setText: this.setText, setWorks: this.setWorks };
+  }
+}
+</script>
+</body>
+</html>

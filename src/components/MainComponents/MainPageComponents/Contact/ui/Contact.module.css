@@ -1,6 +1,6 @@
 .section {
   position: relative;
-  height: 340vh;
+  height: 200vh;
   background: var(--color-paper);
   border-top: 1px solid rgba(42, 45, 38, 0.09);
 }
@@ -10,95 +10,79 @@
   top: 0;
   height: 100vh;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.stage {
-  position: relative;
-  height: 100%;
-}
-
-/* ── photo: upward arch → full-width rectangle, then it stays ── */
 
 .media {
-  --p: 0;
-  --wb: min(62vh, 84vw);
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
+  position: relative;
+  width: 40%;
+  height: 12vh;
   margin: 0;
   overflow: hidden;
-  /* dome at p=0, full-width banner at p=1 */
-  width: calc(var(--wb) + (100% - var(--wb)) * var(--p));
-  height: calc(var(--wb) / 2 + (100% - var(--wb) / 2) * var(--p));
-  border-radius:
-    calc(50% * (1 - var(--p))) calc(50% * (1 - var(--p))) 0 0 /
-    calc(100% * (1 - var(--p))) calc(100% * (1 - var(--p))) 0 0;
-  box-shadow: 0 30px 80px -36px rgba(42, 45, 38, 0.5);
-  will-change: width, height, border-radius;
+  background: #161812;
+  box-shadow: 0 30px 80px -40px rgba(42, 45, 38, 0.55);
+  will-change: width, height;
 }
 
 .media img {
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  left: -9%;
+  top: -9%;
+  width: 118%;
+  height: 118%;
   object-fit: cover;
   object-position: 50% 32%;
   display: block;
+  will-change: transform;
 }
 
 .scrim {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(20, 22, 18, 0.28) 0%, rgba(20, 22, 18, 0.12) 38%, rgba(20, 22, 18, 0.62) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    rgba(8, 8, 10, 0.6),
+    rgba(8, 8, 10, 0.2) 55%,
+    rgba(8, 8, 10, 0) 100%
+  );
   pointer-events: none;
+  will-change: opacity;
 }
-
-/* ── overlaid content, revealed by scroll over the photo ── */
 
 .content {
   position: absolute;
   inset: 0;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: clamp(36px, 7vh, 90px);
+  gap: clamp(28px, 5vh, 64px);
   padding: 7vh 48px;
   pointer-events: none;
+  text-align: center;
 }
 
-/* ── giant single-word title, letter-by-letter ── */
+.titleMask {
+  overflow: hidden;
+  padding: 0 4%;
+}
 
 .title {
   margin: 0;
-  display: flex;
-  justify-content: center;
-  font-family: var(--font-serif);
+  display: block;
+  text-align: center;
+  font-family: var(--font-gt-pro-regular);
   font-weight: 500;
+  font-size: clamp(48px, 11vw, 168px);
   line-height: 0.9;
   letter-spacing: -2px;
   white-space: nowrap;
   color: #fff;
-  text-shadow: 0 8px 40px rgba(0, 0, 0, 0.35);
+  will-change: transform;
 }
-
-.letterMask {
-  display: block;
-  overflow: hidden;
-  padding: 0.14em 0.012em 0;
-  margin-top: -0.14em;
-}
-
-.letter {
-  display: inline-block;
-  font-size: clamp(48px, 11vw, 168px);
-  will-change: transform, opacity;
-}
-
-/* ── contacts — borderless cluster with sliding underline ── */
 
 .contacts {
   display: flex;
@@ -116,23 +100,7 @@
   gap: 12px;
   text-decoration: none;
   color: #fff;
-}
-
-.itemLabel {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-family: var(--font-gt-pro-bold);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 2.5px;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
-}
-
-.itemIndex {
-  font-size: 10px;
-  color: var(--color-green);
+  will-change: opacity, transform;
 }
 
 .itemValue {
@@ -174,25 +142,19 @@
   outline: none;
 }
 
-/* ── responsive ── */
-
 @media (max-width: 1024px) {
   .content {
     padding: 7vh 32px;
-    gap: clamp(30px, 6vh, 64px);
+    gap: clamp(24px, 4vh, 56px);
   }
 }
 
 @media (max-width: 759px) {
-  .section {
-    height: 320vh;
-  }
-
   .media {
-    --wb: min(46vh, 86vw);
+    width: 62%;
   }
 
-  .letter {
+  .title {
     font-size: clamp(40px, 13vw, 96px);
   }
 

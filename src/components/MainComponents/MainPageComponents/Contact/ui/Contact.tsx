@@ -4,7 +4,6 @@ import {
   useScroll,
   useTransform,
   type MotionValue,
-  type MotionStyle,
 } from 'framer-motion';
 import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
@@ -20,12 +19,6 @@ const EMAIL = 'erkeeva.sport@gmail.com';
 
 const TITLE = 'СВЯЖЕМСЯ';
 
-const LETTERS_START = 0.46;
-const LETTERS_END = 0.72;
-
-const CONTACTS_START = 0.74;
-const CONTACTS_END = 1;
-
 const contacts: { label: string; value: string; href: string }[] = [
   { label: 'Телефон', value: PHONE_DISPLAY, href: PHONE_HREF },
   { label: 'Почта', value: EMAIL, href: `mailto:${EMAIL}` },
@@ -33,23 +26,11 @@ const contacts: { label: string; value: string; href: string }[] = [
   { label: 'ВКонтакте', value: 'erkeeva.sport', href: '#' },
 ];
 
-interface ILetterProps {
-  char: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-}
-
-const Letter = ({ char, progress, range }: ILetterProps) => {
-  const y = useTransform(progress, range, ['120%', '0%']);
-  const opacity = useTransform(progress, range, [0, 1]);
-
-  return (
-    <span className={classNames(cls.letterMask, {}, [])}>
-      <motion.span className={classNames(cls.letter, {}, [])} style={{ y, opacity }}>
-        {char}
-      </motion.span>
-    </span>
-  );
+const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
+// easeInOut (smoothstep) — same curve the reference uses for the band/text.
+const smoothstep = (v: number) => {
+  const x = clamp(v);
+  return x * x * (3 - 2 * x);
 };
 
 interface IContactItemProps {
@@ -57,53 +38,47 @@ interface IContactItemProps {
   value: string;
   href: string;
   index: number;
-  progress: MotionValue<number>;
+  expand: MotionValue<number>;
 }
 
-const ContactItem = ({ label, value, href, index, progress }: IContactItemProps) => {
-  const span = (CONTACTS_END - CONTACTS_START) / contacts.length;
-  const start = CONTACTS_START + index * span;
-  const end = Math.min(CONTACTS_END, start + span * 1.6);
-
-  const opacity = useTransform(progress, [start, end], [0, 1]);
-  const y = useTransform(progress, [start, end], [28, 0]);
+const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) => {
+  // Each item slides up + fades in once the band is past half-open, staggered.
+  const reveal = useTransform(expand, (e) =>
+    smoothstep((e - (0.55 + index * 0.05)) / 0.4),
+  );
+  const opacity = reveal;
+  const y = useTransform(reveal, (v) => `${(1 - v) * 22}px`);
 
   return (
     <motion.a
-      className={classNames(cls.item, {}, [])}
+      className={cls.item}
       href={href}
       style={{ opacity, y }}
       aria-label={`${label}: ${value}`}
     >
-      <span className={classNames(cls.itemLabel, {}, [])}>
-        <span className={classNames(cls.itemIndex, {}, [])}>0{index + 1}</span>
-        {label}
-      </span>
-      <span className={classNames(cls.itemValue, {}, [])}>{value}</span>
+      <span className={cls.itemValue}>{value}</span>
     </motion.a>
   );
 };
 
 export const Contact = ({ className }: IContactProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start start', 'end end'],
+    offset: ['start end', 'end start'],
   });
 
-  // Photo morphs from an upward arch (dome) into a full-width rectangle that
-  // then stays in place — fed into the CSS var --p (0 → 1). It never fades.
-  const shape = useTransform(scrollYProgress, [0, 0.4], [0, 1]);
-  const photoStyle = { '--p': shape } as MotionStyle;
+  const expand = useTransform(scrollYProgress, (p) =>
+    smoothstep((3 * p - 0.5) / 0.9),
+  );
 
-  // Distribute each title letter's reveal across the title timeline.
-  const span = (LETTERS_END - LETTERS_START) / TITLE.length;
-  const letters = Array.from(TITLE).map((char, i) => {
-    const start = LETTERS_START + i * span;
-    const end = Math.min(LETTERS_END, start + span * 2);
-    return { char, range: [start, end] as [number, number] };
-  });
+  const frameWidth = useTransform(expand, (e) => `${40 + 60 * e}%`);
+  const frameHeight = useTransform(expand, (e) => `${12 + 88 * e}vh`);
+  const imageY = useTransform(expand, (e) => `${(e - 0.5) * 8}vh`);
+  const scrimOpacity = useTransform(expand, (e) => clamp((e - 0.28) / 0.5));
+
+  const titleReveal = useTransform(expand, (e) => smoothstep((e - 0.5) / 0.42));
+  const titleY = useTransform(titleReveal, (v) => `${(1 - v) * 115}%`);
 
   return (
     <section
@@ -112,37 +87,37 @@ export const Contact = ({ className }: IContactProps) => {
       className={classNames(cls.section, {}, [className ?? ''])}
       aria-label="Контакты"
     >
-      <div className={classNames(cls.sticky, {}, [])}>
-        <div className={classNames(cls.stage, {}, [])}>
-          <motion.figure className={classNames(cls.media, {}, [])} style={photoStyle}>
-            <img src={ContactPhoto} alt="Александра Еркеева" />
-            <span className={classNames(cls.scrim, {}, [])} aria-hidden="true" />
-          </motion.figure>
+      <div className={cls.sticky}>
+        <motion.figure
+          className={cls.media}
+          style={{ width: frameWidth, height: frameHeight }}
+        >
+          <motion.img src={ContactPhoto} alt="Александра Еркеева" style={{ y: imageY }} />
+          <motion.span
+            className={cls.scrim}
+            style={{ opacity: scrimOpacity }}
+            aria-hidden="true"
+          />
+        </motion.figure>
 
-          <div className={classNames(cls.content, {}, [])}>
-            <h2 className={classNames(cls.title, {}, [])}>
-              {letters.map((item, i) => (
-                <Letter
-                  key={i}
-                  char={item.char}
-                  progress={scrollYProgress}
-                  range={item.range}
-                />
-              ))}
-            </h2>
+        <div className={cls.content}>
+          <div className={cls.titleMask}>
+            <motion.h2 className={cls.title} style={{ y: titleY }}>
+              {TITLE}
+            </motion.h2>
+          </div>
 
-            <div className={classNames(cls.contacts, {}, [])}>
-              {contacts.map((item, i) => (
-                <ContactItem
-                  key={item.label}
-                  index={i}
-                  label={item.label}
-                  value={item.value}
-                  href={item.href}
-                  progress={scrollYProgress}
-                />
-              ))}
-            </div>
+          <div className={cls.contacts}>
+            {contacts.map((item, i) => (
+              <ContactItem
+                key={item.label}
+                index={i}
+                label={item.label}
+                value={item.value}
+                href={item.href}
+                expand={expand}
+              />
+            ))}
           </div>
         </div>
       </div>

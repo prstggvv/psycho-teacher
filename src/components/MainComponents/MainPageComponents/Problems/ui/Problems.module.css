@@ -24,8 +24,6 @@
   color: var(--color-ink);
 }
 
-/* ── strict swiss grid: hairline rules, no gaps ── */
-
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -33,8 +31,6 @@
   border-top: 1px solid rgba(42, 45, 38, 0.16);
   border-left: 1px solid rgba(42, 45, 38, 0.16);
 }
-
-/* ── card ── */
 
 .card {
   position: relative;
@@ -61,8 +57,6 @@
   background: transparent;
 }
 
-/* ── hover fill: a flat panel wipes up from the bottom ── */
-
 .fill {
   position: absolute;
   inset: 0;
@@ -86,8 +80,6 @@
   transform: scaleY(1);
 }
 
-/* ── big outlined number fills the empty ghost cards ── */
-
 .watermark {
   position: absolute;
   right: -8px;
@@ -102,8 +94,6 @@
   -webkit-text-stroke: 1px rgba(79, 107, 82, 0.2);
   user-select: none;
 }
-
-/* ── top hairline that draws in ── */
 
 .rule {
   position: absolute;
@@ -127,8 +117,6 @@
   background: var(--color-green);
 }
 
-/* ── top row: number + arrow ── */
-
 .cardTop {
   position: relative;
   z-index: 1;
@@ -145,7 +133,7 @@
 
 .num {
   display: block;
-  font-family: var(--font-serif);
+  font-family: var(--font-gt-pro-light);
   font-weight: 500;
   font-size: 64px;
   line-height: 1;
@@ -172,13 +160,12 @@
   color: var(--color-green-deep);
 }
 
-/* ── title ── */
-
 .cardTitle {
   position: relative;
   z-index: 1;
   margin: 0;
   max-width: 320px;
+  font-family: var(--font-gt-pro-regular);
   font-weight: 600;
   font-size: 20px;
   line-height: 1.4;
