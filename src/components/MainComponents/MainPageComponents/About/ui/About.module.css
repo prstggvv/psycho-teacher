@@ -1,7 +1,6 @@
 .section {
   position: relative;
   background: var(--color-paper);
-  /* Tall scroll track: gives room for the pinned, scroll-driven reveal. */
   min-height: 320vh;
 }
 
@@ -22,7 +21,7 @@
 
 .text {
   margin: 0;
-  font-family: var(--font-serif);
+  font-family: var(--font-gt-pro-light);
   font-weight: 400;
   color: var(--color-ink-soft);
   font-size: clamp(36px, 5.6vw, 84px);
