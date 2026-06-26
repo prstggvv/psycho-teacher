@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import cls from './WaySection.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { fadeUp, VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
+import { VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
 import TitleSecondPage from '../../../../../shared/ui/TitleSecondPage/TitleSecondPage';
 
 interface IWaySection {
