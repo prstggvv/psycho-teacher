@@ -1,74 +1,23 @@
-import { motion, type Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import cls from './Problems.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { MOTION_EASE, VIEWPORT_ONCE, createStaggerContainer } from '../../../../../shared/lib/motion';
+import { VIEWPORT_ONCE } from '../../../../../shared/lib/motion';
 import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
+import ArrowIcon from '../../../../../shared/ui/icons/ArrowIcon';
+import { problems, type CardVariant } from '../model/problems';
+import {
+  gridVariants,
+  cardVariants,
+  ruleVariants,
+  numVariants,
+  titleLineVariants,
+  arrowVariants,
+} from '../model/motion';
 
 interface IProblemsProps {
   className?: string;
 }
-
-type CardVariant = 'cream' | 'dark' | 'ghost';
-
-interface IProblem {
-  num: string;
-  title: string;
-  variant: CardVariant;
-}
-
-const problems: IProblem[] = [
-  { num: '01', title: 'Адаптация к нагрузкам', variant: 'cream' },
-  { num: '02', title: 'Готовность к спортивной деятельности — уровень энергии, самоотдача, снятие напряжения', variant: 'ghost' },
-  { num: '03', title: 'Проблема спортивной одарённости', variant: 'dark' },
-  { num: '04', title: 'Взаимоотношение спортсмена и тренера', variant: 'dark' },
-  { num: '05', title: 'Восстановление после травм и поражений', variant: 'ghost' },
-  { num: '06', title: 'Потеря мотивации', variant: 'cream' },
-];
-
-const gridVariants: Variants = createStaggerContainer(0.12, 0.1);
-
-const cardVariants: Variants = {
-  hidden: { opacity: 0, clipPath: 'inset(0% 0% 100% 0%)' },
-  visible: {
-    opacity: 1,
-    clipPath: 'inset(0% 0% 0% 0%)',
-    transition: {
-      duration: 0.7,
-      ease: MOTION_EASE,
-      when: 'beforeChildren',
-      staggerChildren: 0.09,
-    },
-  },
-};
-
-const ruleVariants: Variants = {
-  hidden: { scaleX: 0 },
-  visible: { scaleX: 1, transition: { duration: 0.6, ease: MOTION_EASE } },
-};
-
-// The number slides up from behind its mask — a clean editorial type reveal.
-const numVariants: Variants = {
-  hidden: { y: '110%' },
-  visible: { y: '0%', transition: { duration: 0.6, ease: MOTION_EASE } },
-};
-
-const titleLineVariants: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: MOTION_EASE } },
-};
-
-const arrowVariants: Variants = {
-  hidden: { opacity: 0, rotate: -90 },
-  visible: { opacity: 1, rotate: 0, transition: { duration: 0.5, ease: MOTION_EASE } },
-};
-
-const ArrowIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <line x1="7" y1="17" x2="17" y2="7" />
-    <polyline points="7 7 17 7 17 17" />
-  </svg>
-);
 
 const variantClass: Record<CardVariant, string> = {
   cream: cls.cardCream,

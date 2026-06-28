@@ -3,36 +3,11 @@ import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion
 import cls from './About.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
+import { words, type IWord } from '../model/words';
 
 interface IAboutProps {
   className?: string;
 }
-
-type WordStyle = 'normal' | 'strong' | 'highlight';
-
-interface IWord {
-  text: string;
-  style: WordStyle;
-}
-
-const words: IWord[] = [
-  { text: 'Меня', style: 'normal' },
-  { text: 'зовут', style: 'normal' },
-  { text: 'Александра', style: 'strong' },
-  { text: 'Еркеева', style: 'strong' },
-  { text: '(Чернышева)', style: 'strong' },
-  { text: '—', style: 'normal' },
-  { text: 'спортивный', style: 'normal' },
-  { text: 'тренер', style: 'normal' },
-  { text: 'с', style: 'normal' },
-  { text: 'опытом', style: 'normal' },
-  { text: 'работы', style: 'normal' },
-  { text: 'более', style: 'normal' },
-  { text: '10 лет', style: 'highlight' },
-  { text: 'и', style: 'normal' },
-  { text: 'спортивный', style: 'normal' },
-  { text: 'психолог.', style: 'normal' },
-];
 
 interface IWordProps {
   word: IWord;

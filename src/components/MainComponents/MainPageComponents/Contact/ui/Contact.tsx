@@ -8,23 +8,11 @@ import {
 import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import ContactPhoto from '../../../../../shared/assets/images/contact.jpg';
+import { contacts, TITLE } from '../model/contacts';
 
 interface IContactProps {
   className?: string;
 }
-
-const PHONE_DISPLAY = '+7 978 005 252';
-const PHONE_HREF = 'tel:+7978005252';
-const EMAIL = 'erkeeva.sport@gmail.com';
-
-const TITLE = 'СВЯЖЕМСЯ';
-
-const contacts: { label: string; value: string; href: string }[] = [
-  { label: 'Телефон', value: PHONE_DISPLAY, href: PHONE_HREF },
-  { label: 'Почта', value: EMAIL, href: `mailto:${EMAIL}` },
-  { label: 'Telegram', value: '@erkeeva', href: '#' },
-  { label: 'ВКонтакте', value: 'erkeeva.sport', href: '#' },
-];
 
 const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
 const smoothstep = (v: number) => {
@@ -49,6 +37,7 @@ const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) =
 
   return (
     <motion.a
+      target='_blank'
       className={cls.item}
       href={href}
       style={{ opacity, y }}
