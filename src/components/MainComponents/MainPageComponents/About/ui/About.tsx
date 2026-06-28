@@ -56,8 +56,6 @@ const Word = ({ word, progress, range }: IWordProps) => {
   );
 };
 
-// The reveal completes before the very end of the scroll track so the last
-// word is fully visible while the section is still pinned.
 const REVEAL_END = 0.9;
 
 export const About = ({ className }: IAboutProps) => {

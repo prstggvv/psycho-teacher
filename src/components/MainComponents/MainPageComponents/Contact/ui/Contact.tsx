@@ -27,7 +27,6 @@ const contacts: { label: string; value: string; href: string }[] = [
 ];
 
 const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
-// easeInOut (smoothstep) — same curve the reference uses for the band/text.
 const smoothstep = (v: number) => {
   const x = clamp(v);
   return x * x * (3 - 2 * x);
@@ -42,7 +41,6 @@ interface IContactItemProps {
 }
 
 const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) => {
-  // Each item slides up + fades in once the band is past half-open, staggered.
   const reveal = useTransform(expand, (e) =>
     smoothstep((e - (0.55 + index * 0.05)) / 0.4),
   );

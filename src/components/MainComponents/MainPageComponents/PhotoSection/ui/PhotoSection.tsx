@@ -5,7 +5,7 @@ import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import photoOne from '../../../../../shared/assets/images/photoSection/sesta_one.WEBP';
 import photoTwo from '../../../../../shared/assets/images/photoSection/sestra_second.WEBP';
 import photoThree from '../../../../../shared/assets/images/photoSection/sestra_three.WEBP';
-import photoFour from '../../../../../shared/assets/images/photoSection/sestra_four.WEBP';
+import photoFour from '../../../../../shared/assets/images/photoSection/sestra_four.jpg';
 
 interface IPhotoSectionProps {
   className?: string;
