@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react';
 
 export default () => {
   return defineConfig({
-    base: '/psycho-teacher/',
+    base: '/',
     plugins: [
       react(),
       tsconfigPaths(),

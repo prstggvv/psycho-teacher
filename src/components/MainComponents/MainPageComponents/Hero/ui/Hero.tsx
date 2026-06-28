@@ -1,19 +1,27 @@
 import { motion } from 'framer-motion';
 import cls from './Hero.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
+import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
+import ArrowIcon from '../../../../../shared/ui/icons/ArrowIcon';
 import heroPhoto from '../../../../../shared/assets/images/hero_phoyo.jpg';
+import { HERO_LABEL, HERO_NAME, HERO_SURNAME, HERO_SUBTITLE } from '../model/content';
 
 interface IHeroProps {
   className?: string;
 }
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: 'easeOut' as const, delay },
-});
-
 export const Hero = ({ className }: IHeroProps) => {
+  const isMobile = useIsMobile();
+
+  const fadeUp = (delay: number) =>
+    isMobile
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, ease: 'easeOut' as const, delay },
+        };
+
   return (
     <section
       id="hero"
@@ -21,17 +29,17 @@ export const Hero = ({ className }: IHeroProps) => {
     >
       <div className={classNames(cls.container, {}, [])}>
         <span className={classNames(cls.vlabel, {}, [])}>
-          СПОРТИВНАЯ ПСИХОЛОГИЯ · ТЕННИС
+          {HERO_LABEL}
         </span>
 
         <div className={classNames(cls.content, {}, [])}>
           <motion.h1
             className={classNames(cls.title, {}, [])}
             {...fadeUp(0.18)}>
-            Александра
+            {HERO_NAME}
             <br />
             <span className={classNames(cls.titleSurname, {}, [])}>
-              Еркеева
+              {HERO_SURNAME}
               <svg
                 className={classNames(cls.swash, {}, [])}
                 viewBox="0 0 360 18"
@@ -47,9 +55,7 @@ export const Hero = ({ className }: IHeroProps) => {
           </motion.h1>
 
           <motion.p className={classNames(cls.subtitle, {}, [])} {...fadeUp(0.32)}>
-            Помогаю спортсменам и любителям справляться с волнением, возвращать
-            уверенность и снова получать удовольствие от игры — на корте и за
-            его пределами.
+            {HERO_SUBTITLE}
           </motion.p>
 
           <motion.a
@@ -60,21 +66,7 @@ export const Hero = ({ className }: IHeroProps) => {
             {...fadeUp(0.44)}
           >
             <span className={classNames(cls.ctaCircle, {}, [])}>
-              <svg
-                className={classNames(cls.ctaIcon, {}, [])}
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="7" y1="17" x2="17" y2="7" />
-                <polyline points="7 7 17 7 17 17" />
-              </svg>
+              <ArrowIcon size={22} strokeWidth={1.7} className={classNames(cls.ctaIcon, {}, [])} />
             </span>
             <span className={classNames(cls.ctaText, {}, [])}>
               Записаться
@@ -119,9 +111,13 @@ export const Hero = ({ className }: IHeroProps) => {
 
         <motion.div
           className={classNames(cls.photo, {}, [])}
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.0, ease: 'easeOut', delay: 0.2 }}
+          {...(isMobile
+            ? {}
+            : {
+                initial: { opacity: 0, scale: 0.97 },
+                animate: { opacity: 1, scale: 1 },
+                transition: { duration: 1.0, ease: 'easeOut' as const, delay: 0.2 },
+              })}
         >
           <img
             className={classNames(cls.photoImg, {}, [])}

@@ -8,26 +8,13 @@ import {
 import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import ContactPhoto from '../../../../../shared/assets/images/contact.jpg';
+import { contacts, TITLE } from '../model/contacts';
 
 interface IContactProps {
   className?: string;
 }
 
-const PHONE_DISPLAY = '+7 978 005 252';
-const PHONE_HREF = 'tel:+7978005252';
-const EMAIL = 'erkeeva.sport@gmail.com';
-
-const TITLE = 'СВЯЖЕМСЯ';
-
-const contacts: { label: string; value: string; href: string }[] = [
-  { label: 'Телефон', value: PHONE_DISPLAY, href: PHONE_HREF },
-  { label: 'Почта', value: EMAIL, href: `mailto:${EMAIL}` },
-  { label: 'Telegram', value: '@erkeeva', href: '#' },
-  { label: 'ВКонтакте', value: 'erkeeva.sport', href: '#' },
-];
-
 const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
-// easeInOut (smoothstep) — same curve the reference uses for the band/text.
 const smoothstep = (v: number) => {
   const x = clamp(v);
   return x * x * (3 - 2 * x);
@@ -42,7 +29,6 @@ interface IContactItemProps {
 }
 
 const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) => {
-  // Each item slides up + fades in once the band is past half-open, staggered.
   const reveal = useTransform(expand, (e) =>
     smoothstep((e - (0.55 + index * 0.05)) / 0.4),
   );
@@ -51,6 +37,7 @@ const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) =
 
   return (
     <motion.a
+      target='_blank'
       className={cls.item}
       href={href}
       style={{ opacity, y }}
