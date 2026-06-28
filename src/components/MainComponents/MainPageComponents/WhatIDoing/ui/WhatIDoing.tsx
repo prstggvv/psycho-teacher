@@ -10,6 +10,7 @@ import {
 import cls from './WhatIDoing.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { MOTION_EASE, VIEWPORT_ONCE, createStaggerContainer } from '../../../../../shared/lib/motion';
+import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
 
 interface IWhatIDoingProps {
@@ -53,9 +54,10 @@ const cardVariants: Variants = {
 interface IBentoCardProps {
   card: ICard;
   progress: MotionValue<number>;
+  isMobile: boolean;
 }
 
-const BentoCard = ({ card, progress }: IBentoCardProps) => {
+const BentoCard = ({ card, progress, isMobile }: IBentoCardProps) => {
   const y = useTransform(progress, [0, 1], [card.offset, -card.offset]);
 
   return (
@@ -65,7 +67,7 @@ const BentoCard = ({ card, progress }: IBentoCardProps) => {
         [cls.cardWide]: card.variant === 'wide',
       }, [])}
       variants={cardVariants}
-      style={{ y }}
+      style={isMobile ? undefined : { y }}
     >
       {card.variant === 'feature' && (
         <span className={classNames(cls.dots, {}, [])} aria-hidden="true" />
@@ -100,6 +102,7 @@ const BentoCard = ({ card, progress }: IBentoCardProps) => {
 
 export const WhatIDoing = ({ className }: IWhatIDoingProps) => {
   const sectionRef = useRef<HTMLElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -127,12 +130,12 @@ export const WhatIDoing = ({ className }: IWhatIDoingProps) => {
         <motion.div
           className={classNames(cls.bento, {}, [])}
           variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
+          {...(isMobile
+            ? { initial: false as const, animate: 'visible' }
+            : { initial: 'hidden', whileInView: 'visible', viewport: VIEWPORT_ONCE })}
         >
           {cards.map((card) => (
-            <BentoCard key={card.num} card={card} progress={progress} />
+            <BentoCard key={card.num} card={card} progress={progress} isMobile={isMobile} />
           ))}
         </motion.div>
       </div>

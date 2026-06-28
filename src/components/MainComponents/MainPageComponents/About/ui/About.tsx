@@ -2,6 +2,7 @@ import { Fragment, useRef } from 'react';
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
 import cls from './About.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
+import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 
 interface IAboutProps {
   className?: string;
@@ -37,9 +38,10 @@ interface IWordProps {
   word: IWord;
   progress: MotionValue<number>;
   range: [number, number];
+  isMobile: boolean;
 }
 
-const Word = ({ word, progress, range }: IWordProps) => {
+const Word = ({ word, progress, range, isMobile }: IWordProps) => {
   const opacity = useTransform(progress, range, [0.12, 1]);
   const y = useTransform(progress, range, [14, 0]);
 
@@ -49,7 +51,7 @@ const Word = ({ word, progress, range }: IWordProps) => {
         [cls.wordStrong]: word.style === 'strong',
         [cls.wordHighlight]: word.style === 'highlight',
       }, [])}
-      style={{ opacity, y }}
+      style={isMobile ? undefined : { opacity, y }}
     >
       {word.text}
     </motion.span>
@@ -60,6 +62,7 @@ const REVEAL_END = 0.9;
 
 export const About = ({ className }: IAboutProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -85,6 +88,7 @@ export const About = ({ className }: IAboutProps) => {
                     word={word}
                     progress={scrollYProgress}
                     range={[start, end]}
+                    isMobile={isMobile}
                   />
                   {i < words.length - 1 && ' '}
                 </Fragment>

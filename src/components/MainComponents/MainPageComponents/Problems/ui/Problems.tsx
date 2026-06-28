@@ -2,6 +2,7 @@ import { motion, type Variants } from 'framer-motion';
 import cls from './Problems.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { MOTION_EASE, VIEWPORT_ONCE, createStaggerContainer } from '../../../../../shared/lib/motion';
+import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 import TitleFirstPage from '../../../../../shared/ui/TitleFirstPage/TitleFirstPage';
 
 interface IProblemsProps {
@@ -76,6 +77,12 @@ const variantClass: Record<CardVariant, string> = {
 };
 
 export const Problems = ({ className }: IProblemsProps) => {
+  const isMobile = useIsMobile();
+
+  const motionProps = isMobile
+    ? { initial: false as const, animate: 'visible' }
+    : { initial: 'hidden', whileInView: 'visible', viewport: VIEWPORT_ONCE };
+
   return (
     <section id="problems" className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.inner, {}, [])}>
@@ -89,9 +96,7 @@ export const Problems = ({ className }: IProblemsProps) => {
         <motion.div
           className={classNames(cls.grid, {}, [])}
           variants={gridVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT_ONCE}
+          {...motionProps}
         >
           {problems.map((problem) => (
             <motion.article

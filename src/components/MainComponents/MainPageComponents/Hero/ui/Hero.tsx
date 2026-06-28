@@ -1,19 +1,25 @@
 import { motion } from 'framer-motion';
 import cls from './Hero.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
+import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 import heroPhoto from '../../../../../shared/assets/images/hero_phoyo.jpg';
 
 interface IHeroProps {
   className?: string;
 }
 
-const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.8, ease: 'easeOut' as const, delay },
-});
-
 export const Hero = ({ className }: IHeroProps) => {
+  const isMobile = useIsMobile();
+
+  const fadeUp = (delay: number) =>
+    isMobile
+      ? {}
+      : {
+          initial: { opacity: 0, y: 20 },
+          animate: { opacity: 1, y: 0 },
+          transition: { duration: 0.8, ease: 'easeOut' as const, delay },
+        };
+
   return (
     <section
       id="hero"
@@ -119,9 +125,13 @@ export const Hero = ({ className }: IHeroProps) => {
 
         <motion.div
           className={classNames(cls.photo, {}, [])}
-          initial={{ opacity: 0, scale: 0.97 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.0, ease: 'easeOut', delay: 0.2 }}
+          {...(isMobile
+            ? {}
+            : {
+                initial: { opacity: 0, scale: 0.97 },
+                animate: { opacity: 1, scale: 1 },
+                transition: { duration: 1.0, ease: 'easeOut' as const, delay: 0.2 },
+              })}
         >
           <img
             className={classNames(cls.photoImg, {}, [])}

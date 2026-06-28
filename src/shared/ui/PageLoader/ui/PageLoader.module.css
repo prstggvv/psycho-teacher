@@ -9,7 +9,6 @@
   pointer-events: auto;
 }
 
-/* The cream cover + brush mask fills the whole viewport, behind the content. */
 .wipeLayer {
   position: absolute;
   inset: 0;
@@ -18,7 +17,6 @@
   display: block;
 }
 
-/* ---------------- loading content ---------------- */
 .content {
   position: relative;
   z-index: 1;
@@ -29,7 +27,6 @@
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* Fade the ring/percent out as the brush starts wiping. */
 .wiping .content {
   opacity: 0;
   transform: translateY(-8px);
@@ -45,7 +42,6 @@
 .ring {
   width: 100%;
   height: 100%;
-  /* start the stroke at 12 o'clock and run clockwise */
   transform: rotate(-90deg);
 }
 
@@ -62,7 +58,6 @@
   transition: stroke-dashoffset 0.25s ease-out;
 }
 
-/* A short bright arc that keeps spinning to signal activity. */
 .ringSpark {
   stroke: var(--color-ball);
   stroke-width: 3;
