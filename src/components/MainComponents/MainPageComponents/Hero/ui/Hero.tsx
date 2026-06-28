@@ -124,7 +124,6 @@ export const Hero = ({ className }: IHeroProps) => {
             src={heroPhoto}
             alt="Александра Еркеева"
           />
-          <span className={classNames(cls.ball, {}, [])} />
         </motion.div>
       </div>
     </section>

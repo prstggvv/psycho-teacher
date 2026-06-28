@@ -1,5 +1,5 @@
-export const PHONE_DISPLAY = '+7 978 005 252';
-export const PHONE_HREF = 'tel:+7978005252';
+export const PHONE_DISPLAY = '+7 937 586 0242';
+export const PHONE_HREF = 'tel:+9375860242';
 export const EMAIL = 'erkeeva.sport@gmail.com';
 export const TITLE = 'НА СВЯЗИ';
 
