@@ -9,44 +9,12 @@ import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import ContactPhoto from '../../../../../shared/assets/images/contact.jpg';
 import { contacts, TITLE } from '../model/contacts';
+import { ContactItem } from '../../ContactItem';
+import { smoothstep, clamp } from '../../../../../shared/lib/constants';
 
 interface IContactProps {
   className?: string;
 }
-
-const clamp = (v: number) => Math.min(Math.max(v, 0), 1);
-const smoothstep = (v: number) => {
-  const x = clamp(v);
-  return x * x * (3 - 2 * x);
-};
-
-interface IContactItemProps {
-  label: string;
-  value: string;
-  href: string;
-  index: number;
-  expand: MotionValue<number>;
-}
-
-const ContactItem = ({ label, value, href, index, expand }: IContactItemProps) => {
-  const reveal = useTransform(expand, (e) =>
-    smoothstep((e - (0.55 + index * 0.05)) / 0.4),
-  );
-  const opacity = reveal;
-  const y = useTransform(reveal, (v) => `${(1 - v) * 22}px`);
-
-  return (
-    <motion.a
-      target='_blank'
-      className={cls.item}
-      href={href}
-      style={{ opacity, y }}
-      aria-label={`${label}: ${value}`}
-    >
-      <span className={cls.itemValue}>{value}</span>
-    </motion.a>
-  );
-};
 
 export const Contact = ({ className }: IContactProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
