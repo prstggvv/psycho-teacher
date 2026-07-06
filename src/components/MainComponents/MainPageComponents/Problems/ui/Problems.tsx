@@ -35,8 +35,6 @@ export const Problems = ({ className }: IProblemsProps) => {
   return (
     <section id="problems" className={classNames(cls.section, {}, [className ?? ''])}>
       <div className={classNames(cls.inner, {}, [])}>
-        <header className={classNames(cls.head, {}, [])}>
-        </header>
         <TitleFirstPage
           title='Какие проблемы решает спортивная психология?'
           subtitle='01 - 06'

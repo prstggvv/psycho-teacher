@@ -5,6 +5,7 @@ import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
 import ArrowIcon from '../../../../../shared/ui/icons/ArrowIcon';
 import heroPhoto from '../../../../../shared/assets/images/hero_phoyo.jpg';
 import { HERO_LABEL, HERO_NAME, HERO_SURNAME, HERO_SUBTITLE } from '../model/content';
+import LineHero from '../../../../../shared/ui/LineHero/LineHero';
 
 interface IHeroProps {
   className?: string;
@@ -40,17 +41,7 @@ export const Hero = ({ className }: IHeroProps) => {
             <br />
             <span className={classNames(cls.titleSurname, {}, [])}>
               {HERO_SURNAME}
-              <svg
-                className={classNames(cls.swash, {}, [])}
-                viewBox="0 0 360 18"
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                <path
-                  className={classNames(cls.swashPath, {}, [])}
-                  d="M5 12 C 70 4, 150 17, 240 8 C 300 2, 340 10, 356 6"
-                />
-              </svg>
+              <LineHero className={classNames(cls.svgAnim, {}, [])} />
             </span>
           </motion.h1>
 

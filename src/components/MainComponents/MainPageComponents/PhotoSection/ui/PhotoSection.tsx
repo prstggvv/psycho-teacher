@@ -3,6 +3,7 @@ import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'fr
 import cls from './PhotoSection.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { photos, type IPhoto } from '../model/photos';
+import { PhotoLayer } from '../../../../PhotoLayer';
 
 interface IPhotoSectionProps {
   className?: string;
@@ -12,31 +13,6 @@ interface IPhotoLayerProps {
   photo: IPhoto;
   progress: MotionValue<number>;
 }
-
-const PhotoLayer = ({ photo, progress }: IPhotoLayerProps) => {
-  const y = useTransform(progress, [0, 1], [`${photo.from}vh`, `${photo.to}vh`]);
-
-  return (
-    <motion.figure
-      className={classNames(cls.photo, {}, [])}
-      style={{
-        y,
-        x: photo.x,
-        width: photo.width,
-        rotate: photo.rotate,
-      }}
-    >
-      <div className={classNames(cls.frame, {}, [])}>
-        <img
-          className={classNames(cls.img, {}, [])}
-          src={photo.src}
-          alt={photo.caption}
-          loading="lazy"
-        />
-      </div>
-    </motion.figure>
-  );
-};
 
 export const PhotoSection = ({ className }: IPhotoSectionProps) => {
   const sectionRef = useRef<HTMLDivElement>(null);
