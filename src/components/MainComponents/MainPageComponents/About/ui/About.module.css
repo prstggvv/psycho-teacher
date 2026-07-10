@@ -47,7 +47,6 @@
 
 @media (max-width: 768px) {
   .section {
-    /* Shorter track on mobile so the reveal isn't an endless scroll. */
     min-height: 240vh;
   }
 }
