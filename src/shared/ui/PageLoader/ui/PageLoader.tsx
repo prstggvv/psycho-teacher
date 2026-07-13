@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import cls from './PageLoader.module.css';
 import { classNames } from '../../../lib/classNames/classNames';
+import { useIsMobile } from '../../../lib/hooks/useIsMobile';
 
 interface IPageLoaderProps {
   onFinish?: () => void;
@@ -26,6 +27,7 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
   const [stage, setStage] = useState<Stage>('loading');
   const [progress, setProgress] = useState(0);
   const reduced = useRef(prefersReducedMotion());
+  const isMobile = useIsMobile();
   useEffect(() => {
     let raf = 0;
     let current = 0;
@@ -63,13 +65,13 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
 
   useEffect(() => {
     if (stage !== 'wiping') return;
-    const wipeDuration = reduced.current ? 550 : 1550;
+    const wipeDuration = isMobile ? 600 : reduced.current ? 550 : 1550;
     const timer = window.setTimeout(() => {
       setStage('done');
       onFinish?.();
     }, wipeDuration);
     return () => window.clearTimeout(timer);
-  }, [stage, onFinish]);
+  }, [stage, onFinish, isMobile]);
 
   useEffect(() => {
     if (stage === 'done') return;
@@ -88,7 +90,9 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
 
   return (
     <div
-      className={classNames(cls.loader, { [cls.wiping]: isWiping }, [className ?? ''])}
+      className={classNames(cls.loader, { [cls.wiping]: isWiping, [cls.mobile]: isMobile }, [
+        className ?? '',
+      ])}
       role="progressbar"
       aria-busy={!isWiping}
       aria-live="polite"
@@ -97,12 +101,13 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
       aria-valuenow={progress}
       aria-label="Загрузка сайта"
     >
-      <svg
-        className={cls.wipeLayer}
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
+      {!isMobile && (
+        <svg
+          className={cls.wipeLayer}
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
         <defs>
           <filter id="pl-brush" x="-20%" y="-20%" width="140%" height="140%">
             <feTurbulence
@@ -143,15 +148,16 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
             </g>
           </mask>
         </defs>
-        <rect
-          x="0"
-          y="0"
-          width="100"
-          height="100"
-          fill="var(--color-cream)"
-          mask="url(#pl-mask)"
-        />
-      </svg>
+          <rect
+            x="0"
+            y="0"
+            width="100"
+            height="100"
+            fill="var(--color-cream)"
+            mask="url(#pl-mask)"
+          />
+        </svg>
+      )}
       <div className={cls.content}>
         <div className={cls.ringWrap}>
           <svg className={cls.ring} viewBox="0 0 120 120" aria-hidden="true">

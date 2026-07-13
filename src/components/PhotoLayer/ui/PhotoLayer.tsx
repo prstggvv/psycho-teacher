@@ -19,10 +19,12 @@ export const PhotoLayer = ({ className, photo, progress }: IPhotoLayerProps) => 
         y,
         x: photo.x,
         width: photo.width,
-        rotate: photo.rotate,
       }}
     >
-      <div className={classNames(cls.frame, {}, [])}>
+      <div
+        className={classNames(cls.frame, {}, [])}
+        style={{ rotate: `${photo.rotate}deg` }}
+      >
         <img
           className={classNames(cls.img, {}, [])}
           src={photo.src}

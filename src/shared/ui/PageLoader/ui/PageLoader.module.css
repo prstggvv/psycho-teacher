@@ -80,6 +80,32 @@
   color: var(--color-ink-soft);
 }
 
+.mobile {
+  background-color: var(--color-cream);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+.mobile.wiping {
+  opacity: 0;
+}
+
+.mobile.wiping .content {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.mobile .ringSpark {
+  animation: none;
+  opacity: 0;
+}
+
+.mobile .ringProgress {
+  transition: none;
+}
+
 @media (max-width: 600px) {
   .ringWrap {
     width: 124px;

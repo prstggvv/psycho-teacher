@@ -10,7 +10,7 @@ const TelegramIcon = ({
 }: ITelegramIconProps) => {
   return (
     <svg
-      className={classNames(cls.socialLinkIcon, {}, [])}
+      className={classNames(cls.socialLinkIcon, {}, [className ?? ''])}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
