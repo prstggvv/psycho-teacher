@@ -178,3 +178,32 @@
     gap: 22px;
   }
 }
+
+@media (max-width: 768px) {
+  .section {
+    height: auto;
+  }
+
+  .sticky {
+    position: static;
+    height: 100svh;
+    min-height: 520px;
+  }
+
+  .media {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .media img {
+    transform: none !important;
+  }
+
+  .scrim {
+    opacity: 1 !important;
+  }
+
+  .title {
+    transform: none !important;
+  }
+}

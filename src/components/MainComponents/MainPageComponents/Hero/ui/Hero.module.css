@@ -251,7 +251,6 @@
     height: auto;
     min-height: 100vh;
     clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-    animation: clipReveal 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
   }
 
   .photoImg {
@@ -265,16 +264,6 @@
     bottom: auto;
     width: 54px;
     height: 54px;
-  }
-}
-
-@keyframes clipReveal {
-  from {
-    clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%);
-  }
-
-  to {
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
   }
 }
 
@@ -292,10 +281,5 @@
   .swashPath {
     animation: none;
     stroke-dashoffset: 0;
-  }
-
-  .photo {
-    animation: none;
-    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
   }
 }

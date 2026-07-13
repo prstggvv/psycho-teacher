@@ -52,3 +52,11 @@
     font-size: clamp(20px, 6vw, 30px);
   }
 }
+
+/* Mobile: no scroll-driven reveal — items always visible. */
+@media (max-width: 768px) {
+  .item {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

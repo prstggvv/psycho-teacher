@@ -1,6 +1,6 @@
 export const PHONE_DISPLAY = '+7 937 586 0242';
 export const PHONE_HREF = 'tel:+9375860242';
-export const EMAIL = 'erkeeva.sport@gmail.com';
+export const EMAIL = 'Chorea@bk.ru';
 export const TITLE = 'НА СВЯЗИ';
 
 export interface IContact {

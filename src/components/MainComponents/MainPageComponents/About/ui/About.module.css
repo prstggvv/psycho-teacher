@@ -47,6 +47,16 @@
 
 @media (max-width: 768px) {
   .section {
-    min-height: 240vh;
+    min-height: 0;
+  }
+
+  .sticky {
+    position: static;
+    min-height: 0;
+    align-items: flex-start;
+  }
+
+  .inner {
+    padding: clamp(56px, 10vh, 96px) clamp(20px, 5vw, 64px);
   }
 }

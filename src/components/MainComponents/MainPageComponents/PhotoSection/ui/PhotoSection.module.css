@@ -78,7 +78,38 @@
 
 @media (max-width: 768px) {
   .section {
-    min-height: 260vh;
+    min-height: auto;
+  }
+
+  .sticky {
+    position: static;
+    height: auto;
+    padding: clamp(60px, 12vh, 120px) 0;
+  }
+
+  .stage {
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 40px clamp(20px, 5vw, 64px);
+  }
+
+  .photo {
+    position: static;
+    translate: none;
+    transform: none !important;
+    width: clamp(180px, 40vw, 280px) !important;
+  }
+
+  .text {
+    position: static;
+    transform: none;
+    flex-basis: 100%;
+    mix-blend-mode: normal;
+    color: var(--color-ink);
+    margin-bottom: 24px;
   }
 }
 

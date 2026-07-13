@@ -29,3 +29,10 @@
     stroke-dashoffset: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .swashPath {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}

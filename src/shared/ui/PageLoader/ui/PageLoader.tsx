@@ -14,7 +14,9 @@ type Stage = 'loading' | 'wiping' | 'done';
 const RING_RADIUS = 52;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
-const BRUSH_BANDS = [12, 28, 44, 60, 76, 92];
+// Bands overshoot both edges (< 0 and > 100) so the displaced brush strokes
+// always cover the full viewport height — no unrevealed strip left at top/bottom.
+const BRUSH_BANDS = [-8, 8, 24, 40, 56, 72, 88, 104];
 
 const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
@@ -61,7 +63,7 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
 
   useEffect(() => {
     if (stage !== 'wiping') return;
-    const wipeDuration = reduced.current ? 450 : 1150;
+    const wipeDuration = reduced.current ? 550 : 1550;
     const timer = window.setTimeout(() => {
       setStage('done');
       onFinish?.();
@@ -132,7 +134,7 @@ export const PageLoader = ({ onFinish, minDuration = 1700, className }: IPageLoa
                   initial={{ pathLength: 0 }}
                   animate={isWiping ? { pathLength: 1 } : { pathLength: 0 }}
                   transition={{
-                    duration: reduced.current ? 0.4 : 0.7,
+                    duration: reduced.current ? 0.5 : 0.95,
                     ease: [0.76, 0, 0.24, 1],
                     delay: isWiping ? i * 0.06 : 0,
                   }}
