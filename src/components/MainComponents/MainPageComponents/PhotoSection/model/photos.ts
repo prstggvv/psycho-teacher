@@ -1,6 +1,6 @@
 import photoOne from '../../../../../shared/assets/images/photoSection/sesta_one.jpg';
-import photoTwo from '../../../../../shared/assets/images/photoSection/sestra_second.WEBP';
-import photoThree from '../../../../../shared/assets/images/photoSection/sestra_three.WEBP';
+import photoTwo from '../../../../../shared/assets/images/photoSection/sestra_second.jpg';
+import photoThree from '../../../../../shared/assets/images/photoSection/sestra_three.jpg';
 import photoFour from '../../../../../shared/assets/images/photoSection/sestra_four.jpg';
 
 export interface IPhoto {

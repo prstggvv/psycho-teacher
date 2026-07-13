@@ -241,6 +241,10 @@
     padding: 150px clamp(40px, 5vw, 72px) 56px clamp(78px, 7vw, 104px);
   }
 
+  .title {
+    font-size: clamp(52px, 7vw, 118px);
+  }
+
   .photo {
     order: 2;
     width: 42%;

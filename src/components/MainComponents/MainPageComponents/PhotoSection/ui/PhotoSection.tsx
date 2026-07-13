@@ -39,7 +39,6 @@ export const PhotoSection = ({ className }: IPhotoSectionProps) => {
             <PhotoLayer key={photo.caption} photo={photo} progress={progress} />
           ))}
           <div className={classNames(cls.text, {}, [])}>
-            {/* <h2 className={classNames(cls.title, {}, [])}>Это&nbsp;я</h2> */}
           </div>
         </div>
       </div>
