@@ -192,8 +192,6 @@
   color: var(--color-green-deep);
 }
 
-/* ── arrow ── */
-
 .arrowWrap {
   flex: none;
   display: inline-flex;
@@ -228,8 +226,6 @@
   color: var(--color-green-deep);
 }
 
-/* ── responsive ── */
-
 @media (max-width: 1024px) {
   .inner {
     padding: 100px 32px;
@@ -244,7 +240,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 755px) {
   .inner {
     padding: 72px 20px;
   }
