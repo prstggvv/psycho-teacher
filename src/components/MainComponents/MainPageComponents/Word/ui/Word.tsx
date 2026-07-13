@@ -17,7 +17,7 @@ export const Word = ({
   progress,
   range,
   isMobile,
-}) => {
+}: IWordProps) => {
   const opacity = useTransform(progress, range, [0.12, 1]);
   const y = useTransform(progress, range, [14, 0]);
   return (
@@ -25,7 +25,7 @@ export const Word = ({
       className={classNames(cls.word, {
         [cls.wordStrong]: word.style === 'strong',
         [cls.wordHighlight]: word.style === 'highlight',
-      }, [])}
+      }, [className ?? ''])}
       style={isMobile ? undefined : { opacity, y }}
     >
       {word.text}

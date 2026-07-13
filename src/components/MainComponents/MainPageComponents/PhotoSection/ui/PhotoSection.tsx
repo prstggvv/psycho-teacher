@@ -1,17 +1,12 @@
 import { useRef } from 'react';
-import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion';
+import { useScroll, useSpring } from 'framer-motion';
 import cls from './PhotoSection.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
-import { photos, type IPhoto } from '../model/photos';
+import { photos } from '../model/photos';
 import { PhotoLayer } from '../../../../PhotoLayer';
 
 interface IPhotoSectionProps {
   className?: string;
-}
-
-interface IPhotoLayerProps {
-  photo: IPhoto;
-  progress: MotionValue<number>;
 }
 
 export const PhotoSection = ({ className }: IPhotoSectionProps) => {

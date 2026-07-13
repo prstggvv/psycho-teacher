@@ -1,10 +1,5 @@
 import { useRef } from 'react';
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import cls from './Contact.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import ContactPhoto from '../../../../../shared/assets/images/contact.jpg';

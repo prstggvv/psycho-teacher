@@ -1,9 +1,9 @@
 import { Fragment, useRef } from 'react';
-import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion';
+import { useScroll } from 'framer-motion';
 import cls from './About.module.css';
 import { classNames } from '../../../../../shared/lib/classNames/classNames';
 import { useIsMobile } from '../../../../../shared/lib/hooks/useIsMobile';
-import { words, type IWord } from '../model/words';
+import { words } from '../model/words';
 import { Word } from '../../Word';
 
 interface IAboutProps {

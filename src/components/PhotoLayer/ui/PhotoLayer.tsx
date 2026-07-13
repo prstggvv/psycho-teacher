@@ -1,7 +1,7 @@
 import cls from './PhotoLayer.module.css';
 import { classNames } from '../../../shared/lib/classNames/classNames';
 import { motion, useTransform, type MotionValue } from 'framer-motion';
-import type { IPhoto } from '../../MainPageComponents/PhotoSection/model/photos';
+import type { IPhoto } from '../../MainComponents/MainPageComponents/PhotoSection/model/photos';
 
 interface IPhotoLayerProps {
   className?: string;
@@ -11,10 +11,10 @@ interface IPhotoLayerProps {
 
 export const PhotoLayer = ({ className, photo, progress }: IPhotoLayerProps) => {
   const y = useTransform(progress, [0, 1], [`${photo.from}vh`, `${photo.to}vh`]);
-  
+
   return (
     <motion.figure
-      className={classNames(cls.photo, {}, [])}
+      className={classNames(cls.photo, {}, [className ?? ''])}
       style={{
         y,
         x: photo.x,

@@ -5,7 +5,7 @@ import {
   useTransform,
   type MotionValue,
 } from 'framer-motion';
-import { smoothstep, clamp } from '../../../../../shared/lib/constants';
+import { smoothstep } from '../../../../../shared/lib/constants';
 
 interface IContactItemProps {
   className?: string;
@@ -23,7 +23,7 @@ export const ContactItem = ({
   href, 
   index, 
   expand 
-}: IContactItemProps): IContactItemProps => {
+}: IContactItemProps) => {
   const reveal = useTransform(expand, (e) =>
     smoothstep((e - (0.55 + index * 0.05)) / 0.4),
   );

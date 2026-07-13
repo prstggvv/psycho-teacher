@@ -8,7 +8,7 @@ interface ILineHero {
 const LineHero = ({ className }: ILineHero) => {
   return (
     <svg
-      className={classNames(cls.swash, {}, [])}
+      className={classNames(cls.swash, {}, [className ?? ''])}
       viewBox="0 0 360 18"
       preserveAspectRatio="none"
       aria-hidden="true"
