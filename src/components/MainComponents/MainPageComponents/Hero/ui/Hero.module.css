@@ -124,11 +124,18 @@
   font-family: var(--font-gt-pro-bold);
 }
 
-.socials {
+.blockSocial {
   display: flex;
   align-items: center;
   gap: 14px;
   margin-top: 40px;
+}
+
+.socialList {
+  padding: 0;
+  display: flex;
+  list-style: none;
+  gap: 14px;
 }
 
 .socialsLabel {

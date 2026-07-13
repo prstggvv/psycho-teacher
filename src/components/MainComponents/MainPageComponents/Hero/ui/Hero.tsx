@@ -4,6 +4,7 @@ import ArrowIcon from '../../../../../shared/ui/icons/ArrowIcon';
 import heroPhoto from '../../../../../shared/assets/images/hero_phoyo.jpg';
 import { HERO_LABEL, HERO_NAME, HERO_SURNAME, HERO_SUBTITLE } from '../model/content';
 import LineHero from '../../../../../shared/ui/LineHero/LineHero';
+import TelegramIcon from '../../../../../shared/ui/TelegramIcon/TelegramIcon';
 
 interface IHeroProps {
   className?: string;
@@ -50,37 +51,30 @@ export const Hero = ({ className }: IHeroProps) => {
             </span>
           </a>
 
-          <div
-            className={classNames(cls.socials, {}, [])}>
-            <span className={classNames(cls.socialsLabel, {}, [])}>Я в соцсетях</span>
-            <a
-              className={classNames(cls.socialLink, {}, [])}
-              href="#"
-              aria-label="Telegram"
-              tabIndex={0}
-            >
-              <svg
-                className={classNames(cls.socialLinkIcon, {}, [])}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.7"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M22 3 11 14" />
-                <path d="M22 3 15 21l-4-7-7-4 18-7z" />
-              </svg>
-            </a>
-            <a
-              className={classNames(cls.socialLink, {}, [])}
-              href="#"
-              aria-label="ВКонтакте"
-              tabIndex={0}
-            >
-              <span className={classNames(cls.socialVk, {}, [])}>VK</span>
-            </a>
+          <div className={classNames(cls.blockSocial, {}, [])}>
+            <h2 className={classNames(cls.socialsLabel, {}, [])}>
+              Я в соцсетях
+            </h2>
+            <ul className={classNames(cls.socialList, {}, [])}>
+              <li className={classNames(cls.socialItem, {}, [])}>
+                <a 
+                  className={classNames(cls.socialLink, {}, [])}
+                  href='https://t.me/tennis1coachmoscow' 
+                  target='_blank'   
+                >
+                  <TelegramIcon />
+                </a>
+              </li>
+              <li className={classNames(cls.socialItem, {}, [])}>
+                <a 
+                  className={classNames(cls.socialLink, {}, [cls.socialVk])}
+                  href='https://vk.com/id138932826'
+                  target='_blank'
+                >
+                  VK
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
