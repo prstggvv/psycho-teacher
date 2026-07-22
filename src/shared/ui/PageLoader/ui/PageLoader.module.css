@@ -1,0 +1,130 @@
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.wipeLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.wiping .content {
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.ringWrap {
+  position: relative;
+  width: 148px;
+  height: 148px;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ringTrack {
+  stroke: var(--color-ink-soft);
+  stroke-width: 2;
+  opacity: 0.18;
+}
+
+.ringProgress {
+  stroke: var(--color-green);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.25s ease-out;
+}
+
+.ringSpark {
+  stroke: var(--color-ball);
+  stroke-width: 3;
+  stroke-linecap: round;
+  transform-origin: 60px 60px;
+  animation: plSpin 1.4s linear infinite;
+}
+
+@keyframes plSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.label {
+  font-family: var(--font-gt-pro-regular);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.mobile {
+  background-color: var(--color-cream);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+  will-change: opacity;
+}
+
+.mobile.wiping {
+  opacity: 0;
+}
+
+.mobile.wiping .content {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+.mobile .ringSpark {
+  animation: none;
+  opacity: 0;
+}
+
+.mobile .ringProgress {
+  transition: none;
+}
+
+@media (max-width: 600px) {
+  .ringWrap {
+    width: 124px;
+    height: 124px;
+  }
+
+  .label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ringSpark {
+    animation: none;
+    opacity: 0;
+  }
+
+  .ringProgress {
+    transition: none;
+  }
+}

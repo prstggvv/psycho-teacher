@@ -1,0 +1,14 @@
+.word {
+  display: inline-block;
+  will-change: opacity, transform;
+}
+
+.wordStrong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.wordHighlight {
+  color: var(--color-green);
+  font-style: italic;
+}

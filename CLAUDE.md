@@ -18,7 +18,7 @@ There are no test commands — this project has no test suite.
 
 **Stack:** React 19, TypeScript, Vite, React Router v7, Framer Motion, CSS Modules.
 
-**What it is:** A landing site for a Russian psyhology - teacher ("Еркеева Александра") — tennis. Deployed to GitHub Pages at `/compas_web/` (the Vite `base` path reflects this).
+**What it is:** A landing site for a Russian psyhology - teacher ("Еркеева Александра") — tennis. Deployed to GitHub Pages at `//` (the Vite `base` path reflects this).
 
 ### Key architectural decisions
 
